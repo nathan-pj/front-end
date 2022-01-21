@@ -1,16 +1,25 @@
 import Context from "../../../contexts/Context";
 import HouseArrows from "./HouseArrows";
-import { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HouseCard from "./HouseCard";
+
 export default function HomePage() {
   const { testHouses, setTestHouses, likedHouses, setLikedHouses } =
     useContext(Context);
-  const [houseIndex, setHouseIndex] = useState([0]);
-  console.log(testHouses);
+  const [houseIndex, setHouseIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [numOfImages, setNumOfImages] = useState(testHouses[0].house_images.length - 1);
+
   return (
     <div className="swipe-page">
-      <HouseCard house={testHouses[houseIndex]} />;
-      <HouseArrows setHouseIndex={setHouseIndex} />
+      <HouseCard
+        house={testHouses[houseIndex]}
+        currentImage={currentImage}
+        setCurrentImage={setCurrentImage}
+        numOfImages={numOfImages}
+        setNumOfImages={setNumOfImages}
+      />
+      <HouseArrows setHouseIndex={setHouseIndex} setCurrentImage={setCurrentImage}/>
     </div>
   );
 }

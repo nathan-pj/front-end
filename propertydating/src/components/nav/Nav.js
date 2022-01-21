@@ -1,7 +1,9 @@
+import React from 'react';
+
 export default function Nav() {
   return (
-    <div className="test">
+    <nav>
       <h1 className="text-3xl font-bold underline">Nav</h1>
-    </div>
+    </nav>
   );
 }
