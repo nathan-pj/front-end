@@ -1,0 +1,40 @@
+.swipe-page {
+  margin: 0 auto;
+
+  width: 80%;
+}
+
+.house-card {
+  max-width: 500px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.house-card img {
+  width: 100%;
+}
+
+.house-arrows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.image-arrow-left {
+  max-width: 40px;
+  position: absolute;
+  top: 120px;
+  left: 5%;
+}
+.image-arrow-right {
+  max-width: 40px;
+  position: absolute;
+  top: 50px;
+  right: 10%;
+}
+.image-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+}
