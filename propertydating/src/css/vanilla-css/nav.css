@@ -1,3 +1,17 @@
-nav{
+nav {
   height: 80px;
+  background-color: indigo;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: rgb(27, 168, 179);
+}
+
+nav div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: 600;
 }

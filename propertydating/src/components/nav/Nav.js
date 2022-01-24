@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 
 export default function Nav() {
   return (
     <nav>
-      <h1 className="text-3xl font-bold underline">Nav</h1>
+      <div>Profile</div>
+      <div>House List</div>
+      <div>Add property</div>
+      <div>Settings</div>
     </nav>
   );
 }

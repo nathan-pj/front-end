@@ -1,10 +1,16 @@
-.displayNone{
-    display: none;
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Libre Franklin", sans-serif;
 }
 
-.opacity04{
-    opacity: 0.4;
- }
-.opacity1{
-   opacity: 1;
+.displayNone {
+  display: none;
+}
+
+.opacity04 {
+  opacity: 0.4;
+}
+.opacity1 {
+  opacity: 1;
 }

@@ -7,10 +7,10 @@ import Nav from "./nav/Nav";
 export default function App() {
   return (
     <ConstProvider>
-      <Nav />
       <Routes>
         <Route path="/" element={<SwipePage />} />
       </Routes>
+      <Nav />
     </ConstProvider>
   );
 }

@@ -8,12 +8,17 @@ export default function HomePage() {
     useContext(Context);
   const [houseIndex, setHouseIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
-  const [numOfImages, setNumOfImages] = useState(testHouses[0].house_images.length - 1);
+  const [numOfImages, setNumOfImages] = useState(
+    testHouses[0].house_images.length - 1
+  );
 
   useEffect(() => {
     setNumOfImages(testHouses[houseIndex].house_images.length - 1);
-  }, [houseIndex])
+  }, [houseIndex, testHouses]);
 
+  useEffect(() => {
+    console.log(likedHouses);
+  }, [likedHouses]);
   return (
     <div className="swipe-page">
       <HouseCard
@@ -24,7 +29,14 @@ export default function HomePage() {
         setNumOfImages={setNumOfImages}
         setHouseIndex={setHouseIndex}
       />
-      <HouseArrows setHouseIndex={setHouseIndex} setCurrentImage={setCurrentImage}/>
+      <HouseArrows
+        house={testHouses[houseIndex]}
+        setHouseIndex={setHouseIndex}
+        setCurrentImage={setCurrentImage}
+        setLikedHouses={setLikedHouses}
+        likedHouses={likedHouses}
+        houseIndex={houseIndex}
+      />
     </div>
   );
 }
