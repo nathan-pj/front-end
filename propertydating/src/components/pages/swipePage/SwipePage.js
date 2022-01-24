@@ -10,6 +10,10 @@ export default function HomePage() {
   const [currentImage, setCurrentImage] = useState(0);
   const [numOfImages, setNumOfImages] = useState(testHouses[0].house_images.length - 1);
 
+  useEffect(() => {
+    setNumOfImages(testHouses[houseIndex].house_images.length - 1);
+  }, [houseIndex])
+
   return (
     <div className="swipe-page">
       <HouseCard
@@ -18,6 +22,7 @@ export default function HomePage() {
         setCurrentImage={setCurrentImage}
         numOfImages={numOfImages}
         setNumOfImages={setNumOfImages}
+        setHouseIndex={setHouseIndex}
       />
       <HouseArrows setHouseIndex={setHouseIndex} setCurrentImage={setCurrentImage}/>
     </div>

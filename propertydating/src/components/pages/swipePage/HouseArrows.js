@@ -1,10 +1,8 @@
-import React from 'react';
-
 export default function HouseArrows({ setHouseIndex, setCurrentImage }) {
 
   const handleClick = (num) => {
     setHouseIndex((previousState) => previousState + num)
-    setCurrentImage(0)
+    setCurrentImage(0);
   }
   
   return (

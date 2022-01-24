@@ -1,3 +1,4 @@
 @import "tailwind.css";
 @import "./vanilla-css/nav.css";
 @import "./vanilla-css//swipe-page.css";
+@import './vanilla-css/global.css';
