@@ -1,13 +1,13 @@
-.top-nav{
+.top-nav {
   background-color: indigo;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: rgb(27, 168, 179);
   grid-template-areas: ". . logo logo logo login login";
- grid-gap: 10px;
+  grid-gap: 10px;
   padding: 10px;
 }
-.top-nav button{
+.top-nav button {
   border: 1px solid rgb(27, 168, 179);
   border-radius: 10px;
   background-color: #19a8b3;
@@ -15,11 +15,11 @@
   padding: 0px 10px;
   text-transform: uppercase;
 }
-.top-nav button:hover{
-  background-color:  indigo;
+.top-nav button:hover {
+  background-color: indigo;
   color: #19a8b3;
 }
-.top-nav__logo{
+.top-nav__logo {
   grid-area: logo;
   display: flex;
   justify-content: center;
@@ -27,26 +27,30 @@
   text-align: center;
   text-transform: uppercase;
 }
-.top-nav__logo img{
+.top-nav__logo a {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.top-nav__logo img {
   max-height: 40px;
   object-fit: contain;
 }
-.top-nav__login{
+.top-nav__login {
   grid-area: login;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
   gap: 20px;
 }
-.top-nav__login img{
-  width: 30px;  
+.top-nav__login img {
+  width: 30px;
   height: 30px;
   border: 1px solid black;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .bottom-nav {
@@ -60,19 +64,22 @@
 .bottom-nav div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   text-align: center;
   text-transform: uppercase;
   font-size: large;
   font-weight: 600;
   cursor: pointer;
 }
-.bottom-nav div:hover{
+.bottom-nav div:hover {
   background-color: #19a8b3;
   color: indigo;
 }
-
-
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 @media only screen and (max-width: 600px) {
   .bottom-nav {
     grid-template-columns: repeat(2, 1fr);

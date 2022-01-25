@@ -11,7 +11,7 @@ export default function HouseArrows({
     setCurrentImage(0);
     if (liked) {
       if (!likedHouses.includes(house.house_id))
-        setLikedHouses((currentState) => [...currentState, house.house_id]);
+        setLikedHouses((currentState) => [...currentState, house]);
     }
   };
 
