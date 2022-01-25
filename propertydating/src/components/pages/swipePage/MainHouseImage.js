@@ -21,34 +21,21 @@ const MainHouseImage = ({
         setShowCross } = useContext(Context);
 
         const [isDragged, setIsDragged] = useState(false);
-const [mouseEvent, setMouseEvent] = useState()
-const [mouseEventCounter, setMouseEventCounter] = useState(0)
-
-  /*       useEffect(() => {
-          if(mouseEventCounter > 0){
-            onDragOver();
-          }
-          setMouseEventCounter(1)
-        }, [mouseEvent])  */
 
         const onDragOver = (e) => {
-         /*  console.log("tererererer") */
-        /*   setMouseEvent(e) */
+      
           e.preventDefault();
           
           if (e.screenX > window.innerWidth / 2) {
-            console.log("right")
             setShowTick(true)
             setShowCross(false)
           } else {
-            console.log("left")
             setShowCross(true)
             setShowTick(false)
           }
         };
       
         const onDragStart = (e) => {
-          console.log("dragggg")
           setIsDragged(true);
         };
       
@@ -98,17 +85,17 @@ const [mouseEventCounter, setMouseEventCounter] = useState(0)
         };
 
   return (
-    <div className="house-card-meta">
+    <div className="house-card-meta"  onDragOver={onDragOver}>
       <div className="house-card-meta__image">
 
         <div className="house-card-meta__image__container"> 
         <img  draggable="true"
-            onDragOver={onDragOver}
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             onTouchStart={onTouchStart} 
             onTouchEnd={onTouchEnd}
             onTouchMove={onTouchMove} 
+            
       src={image.key} alt="house" />
         {showTick && <img className="house-card-meta__image__container__tick" src={tick} alt="house" />}
         {showCross && <img className="house-card-meta__image__container__cross" src={cross} alt="house" />}
