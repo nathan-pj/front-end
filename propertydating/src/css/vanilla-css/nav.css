@@ -62,9 +62,6 @@
 }
 
 .bottom-nav div {
-  display: flex;
-  flex-direction: column;
-
   text-align: center;
   text-transform: uppercase;
   font-size: large;
@@ -79,6 +76,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.bottom-nav__houseList{
+  position: relative;
+}
+.bottom-nav__houseList__count{
+  border: 1px solid black;
+  color: black;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  top: 0px;
+  right: 0px;
 }
 @media only screen and (max-width: 600px) {
   .bottom-nav {
