@@ -1,7 +1,9 @@
 import React from "react";
 
 export default function ImageArrowLeft({ setCurrentImage, currentImage }) {
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     setCurrentImage((previousState) => previousState - 1);
   };
 
@@ -10,7 +12,7 @@ export default function ImageArrowLeft({ setCurrentImage, currentImage }) {
       {currentImage > 0 ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className=" image-arrow-left "
+          className="image-arrow-left"
           viewBox="0 0 20 20"
           fill="currentColor"
           onClick={handleClick}

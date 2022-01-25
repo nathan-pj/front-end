@@ -3,14 +3,9 @@
   padding: 0px;
   font-family: "Libre Franklin", sans-serif;
 }
-
-.displayNone {
-  display: none;
-}
-
-.opacity04 {
-  opacity: 0.4;
-}
-.opacity1 {
-  opacity: 1;
+.main_container{
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

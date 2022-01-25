@@ -5,7 +5,9 @@ export default function ImageArrowRight({
   currentImage,
   numOfImages,
 }) {
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     setCurrentImage((previousState) => previousState + 1);
   };
 

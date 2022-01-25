@@ -1,4 +1,44 @@
 import React, { useState, createContext } from "react";
+
+const Context = createContext();
+export function ConstProvider({ children }) {
+  const [likedHouses, setLikedHouses] = useState([]);
+  const [testHouses, setTestHouses] = useState(dummyHouse);
+  const [loggedInUser, setLoggedInUser] = useState(user);
+  const [showTick, setShowTick] = useState(false);
+  const [showCross, setShowCross] = useState(false);
+
+  return (
+    <Context.Provider
+      value={{
+        testHouses,
+        setTestHouses,
+        likedHouses,
+        setLikedHouses,
+        loggedInUser,
+        setLoggedInUser,
+        showTick,
+        setShowTick,
+        showCross,
+        setShowCross
+      }}
+    >
+      {children}
+    </Context.Provider>
+  );
+}
+
+const user = {
+  username: "River.Kutch",
+  user_id: 0,
+  password: "molli",
+  firstname: "Vickie",
+  secondname: "Fisher",
+  email: "Rebeka.Rowe@hotmail.com",
+  profilepic:
+    "https://pbs.twimg.com/profile_images/1176237957851881472/CHOXLj9b_400x400.jpg",
+};
+
 const dummyHouse = [
   {
     house_id: 1,
@@ -65,18 +105,5 @@ const dummyHouse = [
     ],
   },
 ];
-const Context = createContext();
-export function ConstProvider({ children }) {
-  const [likedHouses, setLikedHouses] = useState([]);
-  const [testHouses, setTestHouses] = useState(dummyHouse);
-
-  return (
-    <Context.Provider
-      value={{ testHouses, setTestHouses, likedHouses, setLikedHouses }}
-    >
-      {children}
-    </Context.Provider>
-  );
-}
 
 export default Context;

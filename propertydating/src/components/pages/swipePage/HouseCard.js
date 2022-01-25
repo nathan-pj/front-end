@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ImageArrowLeft from "./ImageArrowLeft";
-import ImageArrowRight from "./ImageArrowRight";
+import { useState, useContext } from "react";
+import Context from '../../../contexts/Context';
+
 import MainHouseImage from "./MainHouseImage";
 
 export default function HouseCard({
@@ -11,72 +11,23 @@ export default function HouseCard({
   setNumOfImages,
   setHouseIndex,
 }) {
-  const [isDragged, setIsDragged] = useState(false);
 
-  const onDragOver = (e) => {
-    e.preventDefault();
-  };
 
-  const onDragStart = (e) => {
-    //  e.dataTransfer.setData("id", "setTheId");
-    /*   console.log('onDragStart'); */
-    setIsDragged(true);
-  };
 
-  const onDragEnd = (e) => {
-    e.preventDefault();
-
-    if (e.screenX > window.innerWidth / 2) {
-      console.log("right = swipe");
-      setHouseIndex((currentState) => currentState + 1);
-    } else {
-      console.log("left = skip");
-      setHouseIndex((currentState) => currentState + 1);
-    }
-
-    setIsDragged(false);
-  };
-
-  const onTouchStart = (e) => {
-    setIsDragged(true);
-  };
-
-  const onTouchEnd = (e) => {
-    e.preventDefault();
-
-    if (e.changedTouches[0].pageX > window.innerWidth / 2) {
-      console.log("right = swipe");
-      setHouseIndex((currentState) => currentState + 1);
-    } else {
-      console.log("left = skip");
-      setHouseIndex((currentState) => currentState + 1);
-    }
-
-    setIsDragged(false);
-  };
   return (
     <div
-      className={`house-card ${isDragged && "opacity04"}`}
-      draggable="true"
-      onDragOver={onDragOver}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
+      className={`house-card`}
+     
     >
-      <div className="image-buttons">
-        <ImageArrowLeft
-          setCurrentImage={setCurrentImage}
-          currentImage={currentImage}
-        />
-        <ImageArrowRight
-          setCurrentImage={setCurrentImage}
-          currentImage={currentImage}
-          numOfImages={numOfImages}
-        />
-      </div>
-
-      <MainHouseImage image={house.house_images[currentImage]} house={house} />
+      <MainHouseImage
+        image={house.house_images[currentImage]}
+        house={house}
+        setCurrentImage={setCurrentImage}
+        numOfImages={numOfImages}
+        setNumOfImages={setNumOfImages}
+        currentImage={currentImage}
+        setHouseIndex={setHouseIndex}
+      />
     </div>
   );
 }
