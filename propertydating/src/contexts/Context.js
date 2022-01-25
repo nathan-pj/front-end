@@ -20,7 +20,7 @@ export function ConstProvider({ children }) {
         showTick,
         setShowTick,
         showCross,
-        setShowCross
+        setShowCross,
       }}
     >
       {children}
@@ -86,6 +86,86 @@ const dummyHouse = [
   },
   {
     house_id: 50,
+    type: "detatched",
+    price: 300000,
+    postcode: "121221",
+    house_images: [
+      {
+        key: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        bucket: "images",
+      },
+      {
+        key: "http://cdn.home-designing.com/wp-content/uploads/2019/02/courtyard-design-2.jpg",
+        bucket: "images",
+      },
+      {
+        key: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc080120aman-meeks-005-1591800041.jpg",
+        bucket: "images",
+      },
+    ],
+  },
+  {
+    house_id: 5,
+    type: "detatched",
+    price: 300000,
+    postcode: "121221",
+    house_images: [
+      {
+        key: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        bucket: "images",
+      },
+      {
+        key: "http://cdn.home-designing.com/wp-content/uploads/2019/02/courtyard-design-2.jpg",
+        bucket: "images",
+      },
+      {
+        key: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc080120aman-meeks-005-1591800041.jpg",
+        bucket: "images",
+      },
+    ],
+  },
+  {
+    house_id: 52,
+    type: "detatched",
+    price: 300000,
+    postcode: "121221",
+    house_images: [
+      {
+        key: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        bucket: "images",
+      },
+      {
+        key: "http://cdn.home-designing.com/wp-content/uploads/2019/02/courtyard-design-2.jpg",
+        bucket: "images",
+      },
+      {
+        key: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc080120aman-meeks-005-1591800041.jpg",
+        bucket: "images",
+      },
+    ],
+  },
+  {
+    house_id: 533,
+    type: "detatched",
+    price: 300000,
+    postcode: "121221",
+    house_images: [
+      {
+        key: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        bucket: "images",
+      },
+      {
+        key: "http://cdn.home-designing.com/wp-content/uploads/2019/02/courtyard-design-2.jpg",
+        bucket: "images",
+      },
+      {
+        key: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/edc080120aman-meeks-005-1591800041.jpg",
+        bucket: "images",
+      },
+    ],
+  },
+  {
+    house_id: 30,
     type: "detatched",
     price: 300000,
     postcode: "121221",
