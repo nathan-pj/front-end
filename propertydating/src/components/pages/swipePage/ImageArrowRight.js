@@ -20,7 +20,6 @@ export default function ImageArrowRight({
           viewBox="0 0 20 20"
           fill="currentColor"
           onClick={handleClick}
-          onTouchStart={handleClick}
         >
           <path
             fillRule="evenodd"

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import Context from '../../contexts/Context';
 
+import logo from '../../images/logo.png';
+
 export default function Nav() {
 
     const { loggedInUser } = useContext(Context);
@@ -8,7 +10,7 @@ export default function Nav() {
   return (
     <nav className="top-nav">
       <div className="top-nav__logo">
-        <h1>App Name/Logo</h1>
+        <img src={logo} alt="Property Hook-Up" />
       </div>
       <div className="top-nav__login">
           <button>
