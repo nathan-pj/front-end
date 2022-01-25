@@ -1,6 +1,6 @@
 import ChatIcon from "./ChatIcon";
 import BinIcon from "./BinIcon";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function FavouriteCard({ house, index }) {
   
@@ -8,7 +8,7 @@ export default function FavouriteCard({ house, index }) {
   
   const handleClick = (e) => {
     e.stopPropagation();
-    navigate(`/house-profile`);
+    navigate(`/house-profile/${house.house_id}`);
   }
 
   return (  
@@ -16,9 +16,7 @@ export default function FavouriteCard({ house, index }) {
       <div className="favourite-card__image">
         <img src={house.house_images[0].key} alt="house pic"></img>
         <div className="favourite-card__image__chat-icon">
-          <Link to="/chat">
             <ChatIcon />
-          </Link>
         </div>
         <div className="favourite-card__image__bin-icon">
           <BinIcon index={index} house={house} />

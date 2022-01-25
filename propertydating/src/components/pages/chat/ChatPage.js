@@ -1,3 +1,7 @@
 export default function ChatPage() {
-  return <div>chat page</div>;
+  return (
+    <div>
+      <h1>Chat Page</h1>
+    </div>
+  );
 }

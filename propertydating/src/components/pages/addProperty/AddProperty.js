@@ -1,3 +1,7 @@
 export default function AddProperty() {
-  return <div>add property</div>;
+  return (
+    <div>
+      <h1>Add Property</h1>
+    </div>
+  );
 }

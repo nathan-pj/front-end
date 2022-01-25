@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.png";
 
 export default function Nav() {
-  const { loggedInUser } = useContext(Context);
+  const { loggedInUser, setLoggedInUser, setShowLoginModal} = useContext(Context);
+
+  const handleLogout = () => {
+    setShowLoginModal(true);
+    setLoggedInUser({})
+  }
 
   return (
     <nav className="top-nav">
@@ -15,8 +20,8 @@ export default function Nav() {
       </div>
 
       <div className="top-nav__login">
-        <button>Logout</button>
-        <Link to="/user-profile">
+        <button onClick={handleLogout}>Logout</button>
+        <Link to={`/user-profile/${loggedInUser.user_id}`}>
           <img src={`${loggedInUser.profilepic}`} />
         </Link>
       </div>

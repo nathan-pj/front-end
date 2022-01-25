@@ -7,6 +7,8 @@ export function ConstProvider({ children }) {
   const [loggedInUser, setLoggedInUser] = useState(user);
   const [showTick, setShowTick] = useState(false);
   const [showCross, setShowCross] = useState(false);
+  const [loggedOutUser, setLoggedOutUser] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
     <Context.Provider
@@ -21,6 +23,10 @@ export function ConstProvider({ children }) {
         setShowTick,
         showCross,
         setShowCross,
+        loggedOutUser,
+        setLoggedOutUser,
+        showLoginModal,
+        setShowLoginModal
       }}
     >
       {children}
