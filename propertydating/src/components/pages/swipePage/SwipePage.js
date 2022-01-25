@@ -16,9 +16,7 @@ export default function HomePage() {
     setNumOfImages(testHouses[houseIndex].house_images.length - 1);
   }, [houseIndex, testHouses]);
 
-  useEffect(() => {
-    console.log(likedHouses);
-  }, [likedHouses]);
+
   return (
     <div className="swipe-page">
       <HouseCard

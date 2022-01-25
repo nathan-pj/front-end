@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ImageArrowLeft from "./ImageArrowLeft";
-import ImageArrowRight from "./ImageArrowRight";
+import { useState, useContext } from "react";
+import Context from '../../../contexts/Context';
+
 import MainHouseImage from "./MainHouseImage";
 
 export default function HouseCard({
@@ -11,21 +11,32 @@ export default function HouseCard({
   setNumOfImages,
   setHouseIndex,
 }) {
+
+  const {  setShowTick,
+    setShowCross } = useContext(Context);
+
   const [isDragged, setIsDragged] = useState(false);
 
   const onDragOver = (e) => {
     e.preventDefault();
+    if (e.screenX > window.innerWidth / 2) {
+      console.log("test")
+      setShowTick(true)
+      setShowCross(false)
+    } else {
+      setShowCross(true)
+      setShowTick(false)
+    }
   };
 
   const onDragStart = (e) => {
-    //  e.dataTransfer.setData("id", "setTheId");
-    /*   console.log('onDragStart'); */
+   
     setIsDragged(true);
   };
 
   const onDragEnd = (e) => {
     e.preventDefault();
-
+    setCurrentImage(0)
     if (e.screenX > window.innerWidth / 2) {
       console.log("right = swipe");
       setHouseIndex((currentState) => currentState + 1);
@@ -33,27 +44,41 @@ export default function HouseCard({
       console.log("left = skip");
       setHouseIndex((currentState) => currentState + 1);
     }
-
+    setShowCross(false)
+    setShowTick(false)
     setIsDragged(false);
   };
 
   const onTouchStart = (e) => {
+    e.stopPropagation();
+    setCurrentImage(0);
     setIsDragged(true);
-  };
+  }; 
 
+  const onTouchMove = (e) => {
+    e.stopPropagation();
+    if (e.changedTouches[0].pageX > window.innerWidth / 2) {
+      setShowTick(true)
+      setShowCross(false)
+    } else {
+      setShowCross(true)
+      setShowTick(false)
+    }
+  }
   const onTouchEnd = (e) => {
     e.preventDefault();
-
+    e.stopPropagation();
+    setCurrentImage(0)
     if (e.changedTouches[0].pageX > window.innerWidth / 2) {
-      console.log("right = swipe");
       setHouseIndex((currentState) => currentState + 1);
     } else {
-      console.log("left = skip");
       setHouseIndex((currentState) => currentState + 1);
     }
-
+    setShowCross(false)
+    setShowTick(false)
     setIsDragged(false);
   };
+
   return (
     <div
       className={`house-card ${isDragged && "opacity04"}`}
@@ -61,22 +86,18 @@ export default function HouseCard({
       onDragOver={onDragOver}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
-      onTouchStart={onTouchStart}
+      onTouchStart={onTouchStart} 
       onTouchEnd={onTouchEnd}
+      onTouchMove={onTouchMove} 
     >
-      <div className="image-buttons">
-        <ImageArrowLeft
-          setCurrentImage={setCurrentImage}
-          currentImage={currentImage}
-        />
-        <ImageArrowRight
-          setCurrentImage={setCurrentImage}
-          currentImage={currentImage}
-          numOfImages={numOfImages}
-        />
-      </div>
-
-      <MainHouseImage image={house.house_images[currentImage]} house={house} />
+      <MainHouseImage
+        image={house.house_images[currentImage]}
+        house={house}
+        setCurrentImage={setCurrentImage}
+        numOfImages={numOfImages}
+        setNumOfImages={setNumOfImages}
+        currentImage={currentImage}
+      />
     </div>
   );
 }
