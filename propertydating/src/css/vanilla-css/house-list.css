@@ -18,6 +18,8 @@
 }
 .favourite-card__image {
   position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .favourite-card__image img {
   height: 300px;
@@ -49,6 +51,12 @@
 .favourite_card__meta {
   padding: 10px;
   box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1100px) {
+  .favourites-main {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media only screen and (max-width: 800px) {
   .favourites-main {

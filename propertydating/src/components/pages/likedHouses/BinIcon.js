@@ -5,6 +5,7 @@ import Context from "../../../contexts/Context";
 export default function BinIcon({ index }) {
   const { setLikedHouses, likedHouses } = useContext(Context);
   function handleClick(e) {
+    e.stopPropagation();
     const removeHouse = likedHouses.filter((house, i) => {
       if (index !== i) {
         return house;

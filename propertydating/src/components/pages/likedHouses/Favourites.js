@@ -6,9 +6,11 @@ export default function LikedHouses() {
   const { likedHouses } = useContext(Context);
 
   return (
+    <>
+  <h1>Liked Houses</h1> 
+   {likedHouses.length > 0? 
     <div className="favourites-main">
-      {likedHouses.length > 0
-        ? likedHouses.map((house, index) => {
+      {likedHouses.map((house, index) => {
             return (
               <FavouriteCard
                 key={`house-${index}`}
@@ -16,8 +18,9 @@ export default function LikedHouses() {
                 house={house}
               />
             );
-          })
-        : null}
-    </div>
+          })}
+    </div>:
+     <p>You don't have any liked houses.</p>}
+    </>
   );
 }
