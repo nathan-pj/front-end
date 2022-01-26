@@ -6,7 +6,6 @@ import ImageArrowLeft from "./ImageArrowLeft";
 import ImageArrowRight from "./ImageArrowRight";
 
 const MainHouseImage = ({
-  image,
   house,
   setCurrentImage,
   numOfImages,
@@ -107,7 +106,7 @@ const MainHouseImage = ({
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             onTouchMove={onTouchMove}
-            src={image.key}
+            src={house.house_images[currentImage]}
             alt="house"
           />
           {showTick && (
@@ -140,7 +139,7 @@ const MainHouseImage = ({
       </div>
       <div className="house-card-meta__details">
         <p>{`Price: £${house.price}`}</p>
-        <p>{`Type: ${house.type} `}</p>
+        <p>{`Type: ${house.property_type} `}</p>
         <p>{`Postcode: ${house.postcode}`}</p>
       </div>
     </div>

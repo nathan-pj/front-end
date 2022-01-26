@@ -2,24 +2,29 @@ import Context from "../../../contexts/Context";
 import HouseArrows from "./HouseArrows";
 import React, { useContext, useEffect, useState } from "react";
 import HouseCard from "./HouseCard";
+import { fetchProperties } from "../../../utils/api";
 
 export default function HomePage() {
   const { testHouses, setTestHouses, likedHouses, setLikedHouses } =
     useContext(Context);
   const [houseIndex, setHouseIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
-  const [numOfImages, setNumOfImages] = useState(
-    testHouses[0].house_images.length - 1
-  );
+  const [numOfImages, setNumOfImages] = useState();
   const [amountOfProperties, setAmountOfProperties] = useState(
     testHouses.length
   );
-  console.log(amountOfProperties);
   useEffect(() => {
     if (amountOfProperties > 0) {
       setNumOfImages(testHouses[houseIndex].house_images.length - 1);
     }
   }, [houseIndex, testHouses]);
+
+  useEffect(() => {
+    fetchProperties().then(res => {
+      setTestHouses(res);
+      setAmountOfProperties(res.length);
+    });
+  }, []);
 
   return (
     <div className="swipe-page">

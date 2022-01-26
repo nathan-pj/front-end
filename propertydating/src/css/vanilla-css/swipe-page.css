@@ -30,7 +30,7 @@
   height: 50px;
   cursor: pointer;
 }
-.next-house-arrow-left:hover{
+.next-house-arrow-left:hover {
   fill: red;
   color: red;
 }
@@ -39,7 +39,7 @@
   height: 50px;
   cursor: pointer;
 }
-.next-house-arrow-right:hover{
+.next-house-arrow-right:hover {
   fill: green;
   color: green;
 }
@@ -93,11 +93,11 @@
   margin: 0 auto;
   max-width: 100%;
 }
-.house-card-meta__image__container{
+.house-card-meta__image__container {
   position: relative;
 }
 .house-card-meta__image__container__tick,
-.house-card-meta__image__container__cross{
+.house-card-meta__image__container__cross {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -112,7 +112,7 @@
   justify-content: center;
   gap: 10px;
 }
-.house-card-meta__details p {
+.house-card-meta__details > p {
   color: indigo;
   font-size: 20px;
   font-weight: 600;
@@ -122,6 +122,7 @@
   border-radius: 15px;
   text-align: center;
 }
+
 @media only screen and (max-width: 800px) {
   .house-card img {
     max-width: 300px;

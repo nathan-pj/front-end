@@ -15,8 +15,8 @@
 }
 .favourite-card__image {
   position: relative;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .favourite-card__image img {
   height: 300px;
