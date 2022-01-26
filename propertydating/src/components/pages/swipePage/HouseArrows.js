@@ -5,10 +5,15 @@ export default function HouseArrows({
   setLikedHouses,
   likedHouses,
   house,
+  setAmountOfProperties,
 }) {
   const handleClick = (num, liked) => {
     setHouseIndex((previousState) => previousState + num);
     setCurrentImage(0);
+    setAmountOfProperties((currValue) => {
+      return currValue - 1;
+    });
+
     if (liked) {
       if (!likedHouses.includes(house.house_id))
         setLikedHouses((currentState) => [...currentState, house]);

@@ -13,9 +13,16 @@ const MainHouseImage = ({
   setNumOfImages,
   currentImage,
   setHouseIndex,
+  setAmountOfProperties,
 }) => {
-  const { showTick, setShowTick, showCross, setShowCross, likedHouses, setLikedHouses } =
-    useContext(Context);
+  const {
+    showTick,
+    setShowTick,
+    showCross,
+    setShowCross,
+    likedHouses,
+    setLikedHouses,
+  } = useContext(Context);
 
   const [isDragged, setIsDragged] = useState(false);
 
@@ -81,6 +88,9 @@ const MainHouseImage = ({
     } else {
       setHouseIndex((currentState) => currentState + 1);
     }
+    setAmountOfProperties((currValue) => {
+      return currValue - 1;
+    });
     setShowCross(false);
     setShowTick(false);
     setIsDragged(false);

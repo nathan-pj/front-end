@@ -11,30 +11,45 @@ export default function HomePage() {
   const [numOfImages, setNumOfImages] = useState(
     testHouses[0].house_images.length - 1
   );
-
+  const [amountOfProperties, setAmountOfProperties] = useState(
+    testHouses.length
+  );
+  console.log(amountOfProperties);
   useEffect(() => {
-    setNumOfImages(testHouses[houseIndex].house_images.length - 1);
+    if (amountOfProperties > 0) {
+      setNumOfImages(testHouses[houseIndex].house_images.length - 1);
+    }
   }, [houseIndex, testHouses]);
-
 
   return (
     <div className="swipe-page">
-      <HouseCard
-        house={testHouses[houseIndex]}
-        currentImage={currentImage}
-        setCurrentImage={setCurrentImage}
-        numOfImages={numOfImages}
-        setNumOfImages={setNumOfImages}
-        setHouseIndex={setHouseIndex}
-      />
-      <HouseArrows
-        house={testHouses[houseIndex]}
-        setHouseIndex={setHouseIndex}
-        setCurrentImage={setCurrentImage}
-        setLikedHouses={setLikedHouses}
-        likedHouses={likedHouses}
-        houseIndex={houseIndex}
-      />
+      {amountOfProperties > 0 ? (
+        <>
+          <HouseCard
+            house={testHouses[houseIndex]}
+            currentImage={currentImage}
+            setCurrentImage={setCurrentImage}
+            numOfImages={numOfImages}
+            setNumOfImages={setNumOfImages}
+            setHouseIndex={setHouseIndex}
+            setAmountOfProperties={setAmountOfProperties}
+          />
+          <HouseArrows
+            house={testHouses[houseIndex]}
+            setHouseIndex={setHouseIndex}
+            setCurrentImage={setCurrentImage}
+            setLikedHouses={setLikedHouses}
+            likedHouses={likedHouses}
+            houseIndex={houseIndex}
+            setAmountOfProperties={setAmountOfProperties}
+          />
+        </>
+      ) : (
+        <p>
+          No more properties match your criteria, try increasing your radius in
+          settings
+        </p>
+      )}
     </div>
   );
 }
