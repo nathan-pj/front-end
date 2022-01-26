@@ -1,31 +1,52 @@
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
-import photoStorage from "../../../firebase/index";
-console.log(photoStorage);
+import { storage } from "../../../firebase";
+
 export default function AddProperty() {
   const [postCodeInput, setPostCodeInput] = useState("");
   const [image, setImage] = useState("");
-  console.log(image);
+  const [progress, setProgress] = useState(0);
 
   const handleUpload = (event) => {
     event.preventDefault();
-    const uploadTask = photoStorage.ref(`images/${image.name}`).put(image);
+    const storageRef = ref(storage, `/images/${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
+      (snapshot) => {
+        const prog = Math.round(
+          snapshot(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
       },
+      (err) => console.log(err),
       () => {
-        photoStorage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-          });
+        getDownloadURL(uploadTask.snapsot.ref).then((url) => console.log(url));
       }
     );
   };
+
+  // const handleUpload = (event) => {
+  //   event.preventDefault();
+  //   const uploadTask = storage.ref(`images/${image.name}`).put(image);
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {},
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       storage
+  //         .ref("images")
+  //         .child(image.name)
+  //         .getDownloadURL()
+  //         .then((url) => {
+  //           console.log(url);
+  //         });
+  //     }
+  //   );
+  // };
   return (
     <div className="bg-red-300">
       <h1>Add Property</h1>
@@ -78,6 +99,7 @@ export default function AddProperty() {
         />
         <br />
         <button onClick={handleUpload}>Upload</button>
+        <p>Uploaded {progress} %</p>
         <br />
         {/* <button>Submit</button> */}
       </form>
