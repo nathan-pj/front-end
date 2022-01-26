@@ -6,7 +6,6 @@ import ImageArrowLeft from "./ImageArrowLeft";
 import ImageArrowRight from "./ImageArrowRight";
 
 const MainHouseImage = ({
-  image,
   house,
   setCurrentImage,
   numOfImages,
@@ -107,7 +106,7 @@ const MainHouseImage = ({
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             onTouchMove={onTouchMove}
-            src={image.key}
+            src={house.house_images[currentImage]}
             alt="house"
           />
           {showTick && (
