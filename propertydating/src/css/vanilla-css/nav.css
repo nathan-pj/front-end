@@ -80,10 +80,10 @@
   flex-direction: column;
   justify-content: center;
 }
-.bottom-nav__houseList{
+.bottom-nav__houseList {
   position: relative;
 }
-.bottom-nav__houseList__count{
+.bottom-nav__houseList__count {
   border: 1px solid black;
   color: black;
   background-color: white;

@@ -20,7 +20,7 @@ export default function HomePage() {
   }, [houseIndex, testHouses]);
 
   useEffect(() => {
-    fetchProperties().then((res) => {
+    fetchProperties().then(res => {
       setTestHouses(res);
       setAmountOfProperties(res.length);
     });
