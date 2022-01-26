@@ -59,6 +59,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   color: rgb(27, 168, 179);
+  position: sticky;
+  bottom: 0px;
+  left: 0px;
 }
 
 .bottom-nav div {
