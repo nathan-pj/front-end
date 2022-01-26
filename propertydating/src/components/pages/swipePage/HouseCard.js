@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import Context from '../../../contexts/Context';
+import Context from "../../../contexts/Context";
 
 import MainHouseImage from "./MainHouseImage";
 
@@ -10,15 +10,10 @@ export default function HouseCard({
   numOfImages,
   setNumOfImages,
   setHouseIndex,
+  setAmountOfProperties,
 }) {
-
-
-
   return (
-    <div
-      className={`house-card`}
-     
-    >
+    <div className={`house-card`}>
       <MainHouseImage
         image={house.house_images[currentImage]}
         house={house}
@@ -27,6 +22,7 @@ export default function HouseCard({
         setNumOfImages={setNumOfImages}
         currentImage={currentImage}
         setHouseIndex={setHouseIndex}
+        setAmountOfProperties={setAmountOfProperties}
       />
     </div>
   );
