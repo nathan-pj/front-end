@@ -140,7 +140,7 @@ const MainHouseImage = ({
       </div>
       <div className="house-card-meta__details">
         <p>{`Price: £${house.price}`}</p>
-        <p>{`Type: ${house.type} `}</p>
+        <p>{`Type: ${house.property_type} `}</p>
         <p>{`Postcode: ${house.postcode}`}</p>
       </div>
     </div>
