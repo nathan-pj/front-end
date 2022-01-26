@@ -16,37 +16,17 @@ export default function AddProperty() {
       "state_changed",
       (snapshot) => {
         const prog = Math.round(
-          snapshot(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgress(prog);
       },
       (err) => console.log(err),
       () => {
-        getDownloadURL(uploadTask.snapsot.ref).then((url) => console.log(url));
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
       }
     );
   };
 
-  // const handleUpload = (event) => {
-  //   event.preventDefault();
-  //   const uploadTask = storage.ref(`images/${image.name}`).put(image);
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {},
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     () => {
-  //       storage
-  //         .ref("images")
-  //         .child(image.name)
-  //         .getDownloadURL()
-  //         .then((url) => {
-  //           console.log(url);
-  //         });
-  //     }
-  //   );
-  // };
   return (
     <div className="bg-red-300">
       <h1>Add Property</h1>
@@ -101,7 +81,7 @@ export default function AddProperty() {
         <button onClick={handleUpload}>Upload</button>
         <p>Uploaded {progress} %</p>
         <br />
-        {/* <button>Submit</button> */}
+        <button>Submit</button>
       </form>
     </div>
   );
