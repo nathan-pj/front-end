@@ -18,6 +18,7 @@ export const addNewProperty = (
   beds,
   house_images
 ) => {
+  console.log(user_id, property_type, price, postcode, beds, house_images);
   return propertyHookUpAPI
     .post(`/properties`, {
       user_id: `${user_id}`,
@@ -25,7 +26,7 @@ export const addNewProperty = (
       price: `${price}`,
       postcode: `${postcode}`,
       beds: `${beds}`,
-      house_images: `${house_images}`,
+      house_images: house_images,
     })
     .then((res) => {
       return res.data.property;

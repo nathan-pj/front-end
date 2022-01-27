@@ -36,7 +36,7 @@ export function ConstProvider({ children }) {
 
 const user = {
   username: "River.Kutch",
-  user_id: 0,
+  user_id: "0",
   password: "molli",
   firstname: "Vickie",
   secondname: "Fisher",
