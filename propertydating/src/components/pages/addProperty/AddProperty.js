@@ -14,9 +14,11 @@ export default function AddProperty() {
   const [houseImageArray, setHouseImageArray] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { loggedInUser } = useContext(Context);
 
   const handleUpload = (event) => {
+    setIsError(false);
     event.preventDefault();
     const storageRef = ref(storage, `/images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
@@ -29,7 +31,10 @@ export default function AddProperty() {
         );
         setProgress(prog);
       },
-      (err) => console.log(err),
+      (err) => {
+        console.log(err);
+        setIsError(true);
+      },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setHouseImageArray((currArray) => {
@@ -42,6 +47,7 @@ export default function AddProperty() {
   };
 
   const handleSubmit = (event) => {
+    setIsError(false);
     event.preventDefault();
     setUploaded(false);
     setIsLoading(true);
@@ -64,6 +70,8 @@ export default function AddProperty() {
       })
       .catch((err) => {
         console.log(err);
+        setIsError(true);
+        setIsLoading(false);
       });
   };
   return (
@@ -105,7 +113,7 @@ export default function AddProperty() {
           </div>
         </div>
       </div>
-      <form className="center" action="" onSubmit={handleSubmit}>
+      <form className="center" action="">
         <label htmlFor="property-type">Select Property Type:</label>
         <select
           className="m-1 border-2 border-gray-300 rounded"
@@ -172,11 +180,18 @@ export default function AddProperty() {
           Upload
         </button>
         <p>Uploaded {progress} %</p>
-        <button className="p-1 m-1 ml-0 text-green-100 bg-purple-500 rounded hover:bg-purple-800">
+      </form>
+      {isLoading ? (
+        <p>Uploading your property</p>
+      ) : (
+        <button
+          className="p-1 m-1 ml-0 text-green-100 bg-purple-500 rounded hover:bg-purple-800"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
-      </form>
-      {isLoading ? <p>Uploading your property</p> : null}
+      )}
+      {isError ? <p>Sorry, something went wrong, try again</p> : null}
       {uploaded ? <p>Your property has been uploaded successfully</p> : null}
     </div>
   );
