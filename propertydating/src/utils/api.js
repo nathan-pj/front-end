@@ -31,3 +31,33 @@ export const addNewProperty = (
       return res.data.property;
     });
 };
+
+export const postNewUser = (
+  user_id,
+  username,
+  password,
+  first_name,
+  last_name,
+  email,
+  profile_pic
+) => {
+  return propertyHookUpAPI
+    .post(`/users`, {
+      user_id: user_id,
+      username: username,
+      password: password,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      profile_pic: profile_pic,
+    })
+    .then((res) => {
+      return res.data.user;
+    });
+};
+
+export const getUser = (user_id) => {
+  return propertyHookUpAPI.get(`/users/${user_id}`).then((res) => {
+    return res.data.user;
+  });
+};

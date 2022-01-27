@@ -1,15 +1,21 @@
 import React, { useState, createContext, useEffect } from "react";
+import { postNewUser, getUser } from "../utils/api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Context = createContext();
 export function ConstProvider({ children }) {
   const [likedHouses, setLikedHouses] = useState([]);
   const [testHouses, setTestHouses] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState(user);
+  const [loggedInUser, setLoggedInUser] = useState();
   const [showTick, setShowTick] = useState(false);
   const [showCross, setShowCross] = useState(false);
-  const [loggedOutUser, setLoggedOutUser] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  console.log(user);
 
+  useEffect(() => {
+    postNewuser;
+  }, [isAuthenticated]);
   return (
     <Context.Provider
       value={{
@@ -23,8 +29,6 @@ export function ConstProvider({ children }) {
         setShowTick,
         showCross,
         setShowCross,
-        loggedOutUser,
-        setLoggedOutUser,
         showLoginModal,
         setShowLoginModal,
       }}
@@ -33,16 +37,5 @@ export function ConstProvider({ children }) {
     </Context.Provider>
   );
 }
-
-const user = {
-  username: "River.Kutch",
-  user_id: "0",
-  password: "molli",
-  firstname: "Vickie",
-  secondname: "Fisher",
-  email: "Rebeka.Rowe@hotmail.com",
-  profilepic:
-    "https://pbs.twimg.com/profile_images/1176237957851881472/CHOXLj9b_400x400.jpg",
-};
 
 export default Context;

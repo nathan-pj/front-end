@@ -7,10 +7,10 @@ export default function Nav() {
 
   return (
     <nav className="bottom-nav">
-      <Link to={`/user-profile/${loggedInUser.user_id}`}>
+      <Link to={`/user-profile`}>
         <div>Profile</div>
       </Link>
-      <Link to={`/liked-houses/${loggedInUser.user_id}`}>
+      <Link to={`/liked-houses`}>
         <div className="bottom-nav__houseList">
           House List
           {likedHouses.length > 0 ? (
@@ -23,7 +23,7 @@ export default function Nav() {
       <Link to="/add-property">
         <div>Add property</div>
       </Link>
-      <Link to={`/settings/${loggedInUser.user_id}`}>
+      <Link to={`/settings`}>
         <div>Settings</div>
       </Link>
     </nav>
