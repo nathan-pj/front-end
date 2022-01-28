@@ -42,8 +42,7 @@ export function ConstProvider({ children }) {
         const newArray = testHouses.filter((house) => {
           return likedHouses.includes(house.house_id);
         });
-        const arrayCopy = [...currValue];
-        return arrayCopy.concat(newArray);
+        return newArray;
       });
     }
   }, [likedHouses]);

@@ -7,31 +7,39 @@ import { fetchProperties } from "../../../utils/api";
 export default function HomePage() {
   const { testHouses, setTestHouses, likedHouses, setLikedHouses } =
     useContext(Context);
+  const [filteredProperty, setFilteredPropery] = useState([]);
   const [houseIndex, setHouseIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
   const [numOfImages, setNumOfImages] = useState();
   const [amountOfProperties, setAmountOfProperties] = useState(
     testHouses.length
   );
+
   useEffect(() => {
     if (amountOfProperties > 0) {
       setNumOfImages(testHouses[houseIndex].house_images.length - 1);
     }
-  }, [houseIndex, testHouses]);
+  }, [houseIndex, testHouses, filteredProperty]);
 
   useEffect(() => {
-    fetchProperties().then(res => {
+    fetchProperties().then((res) => {
       setTestHouses(res);
       setAmountOfProperties(res.length);
+      setFilteredPropery((currValue) => {
+        const filtered = testHouses.filter((house) => {
+          return !likedHouses.includes(house.house_id);
+        });
+        return filtered;
+      });
     });
-  }, []);
+  }, [testHouses]);
 
   return (
     <div className="swipe-page">
-      {amountOfProperties > 0 ? (
+      {filteredProperty.length > 0 ? (
         <>
           <HouseCard
-            house={testHouses[houseIndex]}
+            house={filteredProperty[houseIndex]}
             currentImage={currentImage}
             setCurrentImage={setCurrentImage}
             numOfImages={numOfImages}
@@ -40,7 +48,7 @@ export default function HomePage() {
             setAmountOfProperties={setAmountOfProperties}
           />
           <HouseArrows
-            house={testHouses[houseIndex]}
+            house={filteredProperty[houseIndex]}
             setHouseIndex={setHouseIndex}
             setCurrentImage={setCurrentImage}
             setLikedHouses={setLikedHouses}
