@@ -1,14 +1,51 @@
 import React, { useState, createContext, useEffect } from "react";
+import { postNewUser, getUser } from "../utils/api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Context = createContext();
 export function ConstProvider({ children }) {
   const [likedHouses, setLikedHouses] = useState([]);
   const [testHouses, setTestHouses] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState(user);
+  const [listOfLikedHouses, setListOfLikedHouses] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState();
   const [showTick, setShowTick] = useState(false);
   const [showCross, setShowCross] = useState(false);
-  const [loggedOutUser, setLoggedOutUser] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    if (user !== undefined) {
+      postNewUser(
+        user.sub,
+        user.name,
+        user.nickname,
+        user.given_name,
+        user.family_name,
+        user.email,
+        user.picture
+      )
+        .then((res) => {
+          setLoggedInUser(res);
+        })
+        .catch((err) => {
+          getUser(user.sub).then((res) => {
+            setLoggedInUser(res);
+            setLikedHouses([...new Set(res.liked_houses)]);
+          });
+        });
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (likedHouses.length > 0) {
+      setListOfLikedHouses((currValue) => {
+        const newArray = testHouses.filter((house) => {
+          return likedHouses.includes(house.house_id);
+        });
+        return newArray;
+      });
+    }
+  }, [likedHouses]);
 
   return (
     <Context.Provider
@@ -23,26 +60,14 @@ export function ConstProvider({ children }) {
         setShowTick,
         showCross,
         setShowCross,
-        loggedOutUser,
-        setLoggedOutUser,
         showLoginModal,
         setShowLoginModal,
+        listOfLikedHouses,
       }}
     >
       {children}
     </Context.Provider>
   );
 }
-
-const user = {
-  username: "River.Kutch",
-  user_id: "0",
-  password: "molli",
-  firstname: "Vickie",
-  secondname: "Fisher",
-  email: "Rebeka.Rowe@hotmail.com",
-  profilepic:
-    "https://pbs.twimg.com/profile_images/1176237957851881472/CHOXLj9b_400x400.jpg",
-};
 
 export default Context;

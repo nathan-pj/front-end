@@ -3,14 +3,13 @@ import FavouriteCard from "./FavouriteCard";
 import Context from "../../../contexts/Context";
 
 export default function LikedHouses() {
-  const { likedHouses } = useContext(Context);
-
+  const { likedHouses, listOfLikedHouses } = useContext(Context);
   return (
     <>
-  <h1>Liked Houses</h1> 
-   {likedHouses.length > 0? 
-    <div className="favourites-main">
-      {likedHouses.map((house, index) => {
+      <h1>Liked Houses</h1>
+      {likedHouses.length > 0 ? (
+        <div className="favourites-main">
+          {listOfLikedHouses.map((house, index) => {
             return (
               <FavouriteCard
                 key={`house-${index}`}
@@ -19,8 +18,10 @@ export default function LikedHouses() {
               />
             );
           })}
-    </div>:
-     <p>You don't have any liked houses.</p>}
+        </div>
+      ) : (
+        <p>You don't have any liked houses.</p>
+      )}
     </>
   );
 }
