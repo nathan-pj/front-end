@@ -9,6 +9,7 @@ export default function HouseArrows({
   likedHouses,
   house,
   setAmountOfProperties,
+  setInitialRender,
 }) {
   const { user } = useAuth0();
 
@@ -18,7 +19,7 @@ export default function HouseArrows({
     setAmountOfProperties((currValue) => {
       return currValue - 1;
     });
-
+    setInitialRender(false);
     if (liked) {
       if (!likedHouses.includes(house.house_id))
         patchLikedHouses(user.sub, house.house_id).then((res) => {
