@@ -6,16 +6,48 @@ const Context = createContext();
 export function ConstProvider({ children }) {
   const [likedHouses, setLikedHouses] = useState([]);
   const [testHouses, setTestHouses] = useState([]);
+  const [listOfLikedHouses, setListOfLikedHouses] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState();
   const [showTick, setShowTick] = useState(false);
   const [showCross, setShowCross] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { user, isAuthenticated } = useAuth0();
-  console.log(user);
 
   useEffect(() => {
-    postNewuser;
+    if (user !== undefined) {
+      postNewUser(
+        user.sub,
+        user.name,
+        user.nickname,
+        user.given_name,
+        user.family_name,
+        user.email,
+        user.picture
+      )
+        .then((res) => {
+          setLoggedInUser(res);
+        })
+        .catch((err) => {
+          getUser(user.sub).then((res) => {
+            setLoggedInUser(res);
+            setLikedHouses([...new Set(res.liked_houses)]);
+          });
+        });
+    }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (likedHouses.length > 0) {
+      setListOfLikedHouses((currValue) => {
+        const newArray = testHouses.filter((house) => {
+          return likedHouses.includes(house.house_id);
+        });
+        const arrayCopy = [...currValue];
+        return arrayCopy.concat(newArray);
+      });
+    }
+  }, [likedHouses]);
+
   return (
     <Context.Provider
       value={{
@@ -31,6 +63,7 @@ export function ConstProvider({ children }) {
         setShowCross,
         showLoginModal,
         setShowLoginModal,
+        listOfLikedHouses,
       }}
     >
       {children}

@@ -1,3 +1,6 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { patchLikedHouses } from "../../../utils/api";
+
 export default function HouseArrows({
   setHouseIndex,
   houseIndex,
@@ -7,6 +10,8 @@ export default function HouseArrows({
   house,
   setAmountOfProperties,
 }) {
+  const { user } = useAuth0();
+
   const handleClick = (num, liked) => {
     setHouseIndex((previousState) => previousState + num);
     setCurrentImage(0);
@@ -16,7 +21,12 @@ export default function HouseArrows({
 
     if (liked) {
       if (!likedHouses.includes(house.house_id))
-        setLikedHouses((currentState) => [...currentState, house]);
+        patchLikedHouses(user.sub, house.house_id).then((res) => {
+          setLikedHouses((currentState) => {
+            const copy = [...currentState, house.house_id];
+            return copy;
+          });
+        });
     }
   };
 

@@ -61,3 +61,11 @@ export const getUser = (user_id) => {
     return res.data.user;
   });
 };
+
+export const patchLikedHouses = (user_id, property_id) => {
+  return propertyHookUpAPI
+    .patch(`/users/${user_id}/likedhouses`, { property_id: property_id })
+    .then((res) => {
+      return res.data.user;
+    });
+};
