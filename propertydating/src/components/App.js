@@ -1,13 +1,13 @@
 import { ConstProvider } from "../contexts/Context";
 import { Routes, Route } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
 import React, { Suspense } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "../css/imports.css";
 
 import TopNav from "./nav/TopNav";
 import Nav from "./nav/Nav";
-import Login from "./pages/login/Login";
+
 
 const Favourites = React.lazy(() =>
   import("./pages/likedHouses/Favourites.js")
@@ -29,15 +29,13 @@ const SwipePage = React.lazy(() => import("./pages/swipePage/SwipePage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 export default function App() {
+
+  const { isAuthenticated } = useAuth0();
+
   return (
-    <Auth0Provider
-      domain="dev-axskfeua.us.auth0.com"
-      clientId="gStd7GP4anD51mjcDVs3oZqaA2tSdizB"
-      redirectUri={"http://localhost:3000/"}
-    >
       <ConstProvider>
         <TopNav />
-        <Login />
+
         <div className="main_container">
           <Suspense
             fallback={
@@ -46,7 +44,8 @@ export default function App() {
               </div>
             }
           >
-            <Routes>
+
+            {isAuthenticated && <Routes>
               <Route path="/" element={<SwipePage />} />
               <Route path="/liked-houses" element={<Favourites />} />
               <Route path="/user-profile" element={<UserProfile />} />
@@ -58,12 +57,16 @@ export default function App() {
               <Route path="/add-property" element={<AddProperty />} />
               <Route path="/chat/:room_id" element={<ChatPage />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
+            </Routes>}
+
+            {!isAuthenticated && <p>You Must Be Logged in to Access This App.</p>
+            
+            }
+            
           </Suspense>
         </div>
 
         <Nav />
       </ConstProvider>
-    </Auth0Provider>
   );
 }

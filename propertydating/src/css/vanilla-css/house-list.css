@@ -26,8 +26,6 @@
   position: absolute;
   top: 7px;
   left: 7px;
-  height: 60px;
-  width: 60px;
   color: rgb(19, 184, 19);
   transition: all 1s ease;
 }
@@ -40,8 +38,6 @@
   position: absolute;
   top: 7px;
   right: 7px;
-  height: 60px;
-  width: 60px;
   color: red;
   transition: all 1s ease;
 }
