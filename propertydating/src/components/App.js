@@ -7,7 +7,7 @@ import "../css/imports.css";
 
 import TopNav from "./nav/TopNav";
 import Nav from "./nav/Nav";
-import Login from "./pages/login/Login";
+
 
 const Favourites = React.lazy(() =>
   import("./pages/likedHouses/Favourites.js")
@@ -24,7 +24,7 @@ const Settings = React.lazy(() =>
 const AddProperty = React.lazy(() =>
   import("../components/pages/addProperty/AddProperty")
 );
-const ChatPage = React.lazy(() => import("../components/pages/chat/ChatPage"));
+/* const ChatPage = React.lazy(() => import("../components/pages/chat/ChatPage")); */
 const SwipePage = React.lazy(() => import("./pages/swipePage/SwipePage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
@@ -37,7 +37,6 @@ export default function App() {
     >
       <ConstProvider>
         <TopNav />
-        <Login />
         <div className="main_container">
           <Suspense
             fallback={
@@ -48,15 +47,15 @@ export default function App() {
           >
             <Routes>
               <Route path="/" element={<SwipePage />} />
-              <Route path="/liked-houses/:user_id" element={<Favourites />} />
-              <Route path="/user-profile/:user_id" element={<UserProfile />} />
+              <Route path="/liked-houses" element={<Favourites />} />
+              <Route path="/user-profile" element={<UserProfile />} />
               <Route
                 path="/house-profile/:house_id"
                 element={<HouseProfile />}
               />
-              <Route path="/settings/:user_id" element={<Settings />} />
+              <Route path="/settings" element={<Settings />} />
               <Route path="/add-property" element={<AddProperty />} />
-              <Route path="/chat/:room_id" element={<ChatPage />} />
+           {/*    <Route path="/chat/:room_id" element={<ChatPage />} /> */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
