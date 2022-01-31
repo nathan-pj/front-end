@@ -9,7 +9,7 @@ export default function FavouriteCard({ house, index }) {
 
   const { likedHouses } = useContext(Context);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.stopPropagation();
     navigate(`/house-profile/${house.house_id}`);
   };
