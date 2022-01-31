@@ -48,15 +48,15 @@ export default function App() {
           >
             <Routes>
               <Route path="/" element={<SwipePage />} />
-              <Route path="/liked-houses" element={<Favourites />} />
-              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/liked-houses/:user_id" element={<Favourites />} />
+              <Route path="/user-profile/:user_id" element={<UserProfile />} />
               <Route
                 path="/house-profile/:house_id"
                 element={<HouseProfile />}
               />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings/:user_id" element={<Settings />} />
               <Route path="/add-property" element={<AddProperty />} />
-              <Route path="/chat" element={<ChatPage />} />
+              <Route path="/chat/:room_id" element={<ChatPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
