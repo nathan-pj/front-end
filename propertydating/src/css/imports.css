@@ -1,8 +1,9 @@
 @import "./tailwind.css";
 @import "./vanilla-css/nav.css";
-@import "./vanilla-css//swipe-page.css";
+@import "./vanilla-css/swipe-page.css";
 @import "./vanilla-css/global.css";
 @import "./vanilla-css/house-list.css";
-@import "./vanilla-css//login-modal.css";
+@import "./vanilla-css/userProfile.css";
+@import "./vanilla-css/login-modal.css";
 @import "./vanilla-css/newPropertyBoxes.css";
 @import "./vanilla-css/chat.css";
