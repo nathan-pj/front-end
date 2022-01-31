@@ -81,14 +81,17 @@ export default function ChatPage() {
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
-              if (message.owner !== userLoggedIn) {
+              console.log(message.owner);
+              if (message.owner === userLoggedIn) {
                 return (
                   <>
-                    <p>{formatDates(message.date_time)}</p>
+                    <p className="date-user">
+                      {formatDates(message.date_time)}
+                    </p>
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__recipient-bubble recipientMessage"
+                      className="chat-page__screen__user-bubble userMessage"
                     >
                       <p>{message.body}</p>
                     </div>
@@ -96,20 +99,20 @@ export default function ChatPage() {
                 );
               } else if (message.owner === "Chat Bot") {
                 return (
-                  <div className="" key={`message-${key}`}>
-                    <p>{formatDates(message.date_time)}</p>
-                    <h3>{message.owner}</h3>
+                  <div className="chat-bot" key={`message-${key}`}>
                     <p>{message.body}</p>
                   </div>
                 );
               } else {
                 return (
                   <>
-                    <p>{formatDates(message.date_time)}</p>
+                    <p className="date-recipient">
+                      {formatDates(message.date_time)}
+                    </p>
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__user-bubble userMessage"
+                      className="chat-page__screen__recipient-bubble recipientMessage"
                     >
                       <p>{message.body}</p>
                     </div>
