@@ -15,6 +15,8 @@ export default function HomePage() {
   const [amountOfProperties, setAmountOfProperties] = useState(
     testHouses.length
   );
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     if (amountOfProperties > 0) {
@@ -23,6 +25,7 @@ export default function HomePage() {
   }, [houseIndex, testHouses, filteredProperty]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchProperties().then((res) => {
       setTestHouses(res);
       setAmountOfProperties(res.length);
@@ -32,12 +35,15 @@ export default function HomePage() {
         });
         return filtered;
       });
+      setIsLoading(false);
+     
     });
   }, [testHouses]);
 
   return (
     <div className="swipe-page">
-      {filteredProperty.length > 0 ? (
+     
+    {isLoading?  <p>Loading</p> : filteredProperty.length > 0 ? 
         <>
           {initialRender && (
             <p>
@@ -65,7 +71,7 @@ export default function HomePage() {
             setAmountOfProperties={setAmountOfProperties}
           />
         </>
-      ) : (
+       : (
         <p>
           No more properties match your criteria, try increasing your radius in
           settings
