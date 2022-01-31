@@ -1,5 +1,6 @@
 import { ConstProvider } from "../contexts/Context";
 import { Routes, Route } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 import React, { Suspense } from "react";
 
 import "../css/imports.css";
@@ -29,32 +30,40 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 export default function App() {
   return (
-    <ConstProvider>
-      <TopNav />
-      <Login />
-      <div className="main_container">
-        <Suspense
-          fallback={
-            <div className="spinner-container">
-              <i className="fas fa-circle-notch fa-spin fa-5x"></i>
-            </div>
-          }
-        >
-          <Routes>
-            <Route path="/" element={<SwipePage />} />
-            <Route path="/liked-houses/:user_id" element={<Favourites />} />
-            <Route path="/user-profile/:user_id" element={<UserProfile />} />
-            <Route path="/house-profile/:house_id" element={<HouseProfile />} />
-            <Route path="/settings/:user_id" element={<Settings />} />
-            <Route path="/add-property" element={<AddProperty />} />
-            <Route path="/chat/:room_id" element={<ChatPage />} />
+    <Auth0Provider
+      domain="dev-axskfeua.us.auth0.com"
+      clientId="gStd7GP4anD51mjcDVs3oZqaA2tSdizB"
+      redirectUri={"http://localhost:3000/"}
+    >
+      <ConstProvider>
+        <TopNav />
+        <Login />
+        <div className="main_container">
+          <Suspense
+            fallback={
+              <div className="spinner-container">
+                <i className="fas fa-circle-notch fa-spin fa-5x"></i>
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<SwipePage />} />
+              <Route path="/liked-houses/:user_id" element={<Favourites />} />
+              <Route path="/user-profile/:user_id" element={<UserProfile />} />
+              <Route
+                path="/house-profile/:house_id"
+                element={<HouseProfile />}
+              />
+              <Route path="/settings/:user_id" element={<Settings />} />
+              <Route path="/add-property" element={<AddProperty />} />
+              <Route path="/chat/:room_id" element={<ChatPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </div>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </div>
-
-      <Nav />
-    </ConstProvider>
+        <Nav />
+      </ConstProvider>
+    </Auth0Provider>
   );
 }
