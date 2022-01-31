@@ -14,7 +14,7 @@ export default function ChatPage() {
   const [message, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
   const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("21213");
+  const [userId, setUserId] = useState("");
   const [users, SetUsers] = useState([]);
   const [messageFromServer, setMessageFromServer] = useState([]);
   const [userLeft, setUserLeft] = useState(false);
@@ -29,7 +29,7 @@ export default function ChatPage() {
 
     // client-side
     socket.on("connect", () => {
-      console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+      // console.log(socket.id); // x8WIv7-mJelg7on_ALbx
     });
 
     socket.emit("join room", { username: user, userId, to: room_id });
@@ -76,21 +76,23 @@ export default function ChatPage() {
   };
   return (
     <div className="chat-page">
-      <h1>Chat Page</h1>
+      <h1>{userId}</h1>
       <div className="chat-page__screen">
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
-              if (message.owner === userLoggedIn) {
+              if (message.owner !== userLoggedIn) {
                 return (
-                  <div
-                    className="chat-page__screen__recipient-bubble recipientMessage"
-                    key={`message-${key}`}
-                  >
+                  <>
                     <p>{formatDates(message.date_time)}</p>
-                    <h3>{message.owner}</h3>
-                    <p>{message.body}</p>
-                  </div>
+
+                    <div
+                      key={`message-${key}`}
+                      className="chat-page__screen__recipient-bubble recipientMessage"
+                    >
+                      <p>{message.body}</p>
+                    </div>
+                  </>
                 );
               } else if (message.owner === "Chat Bot") {
                 return (
@@ -102,12 +104,16 @@ export default function ChatPage() {
                 );
               } else {
                 return (
-                  <div className="chat-page__screen__user-bubble userMessage">
-                    <div key={`message-${key}`}>
-                      <h3>{message.owner}</h3>
+                  <>
+                    <p>{formatDates(message.date_time)}</p>
+
+                    <div
+                      key={`message-${key}`}
+                      className="chat-page__screen__user-bubble userMessage"
+                    >
                       <p>{message.body}</p>
                     </div>
-                  </div>
+                  </>
                 );
               }
             })}
