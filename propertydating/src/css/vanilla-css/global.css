@@ -4,7 +4,7 @@
   font-family: "Libre Franklin", sans-serif;
 }
 .main_container {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 140px);
   padding: 20px 0px;
   margin: 0 auto;
   width: 80%;
