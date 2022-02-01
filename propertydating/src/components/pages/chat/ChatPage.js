@@ -1,14 +1,15 @@
 import chatDummy from "./chatDummy";
 import TextInput from "./TextInput";
 import { useState, useEffect } from "react";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { io } from "socket.io-client";
 import { useParams, Link } from "react-router-dom";
-
+import GetRecipientName from "./GetRecipientName";
 export default function ChatPage() {
   const [messages, setMessages] = useState(chatDummy.messages);
   const userLoggedIn = 2;
   const socket = io("https://property-backend-api.herokuapp.com/");
+
   const { room_id } = useParams();
 
   const [message, setMessage] = useState("");
@@ -18,21 +19,25 @@ export default function ChatPage() {
   const [users, SetUsers] = useState([]);
   const [messageFromServer, setMessageFromServer] = useState([]);
   const [userLeft, setUserLeft] = useState(false);
-
+  const { user } = useAuth0();
   useEffect(() => {
     //let user = prompt("Please enter your username");
-    let user = 2;
+    setUserId(user.sub);
 
     /*    const toAndFromIds = room_id.split("-"); */
 
-    setUsername(user);
+    setUsername(user.name);
 
     // client-side
     socket.on("connect", () => {
       // console.log(socket.id); // x8WIv7-mJelg7on_ALbx
     });
 
-    socket.emit("join room", { username: user, userId, to: room_id });
+    socket.emit("join room", {
+      username: user.name,
+      userId: user.sub,
+      to: room_id,
+    });
 
     socket.on("user joined", (msg) => {
       setMessageFromServer([msg]);
@@ -74,24 +79,27 @@ export default function ChatPage() {
       return `${newDate}`;
     }
   };
+
   return (
     <div className="chat-page">
-      <h1>{userId}</h1>
+      <GetRecipientName />
+
       <div className="chat-page__screen">
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
-              console.log(message.owner);
+<<<<<<< HEAD
               if (message.owner === userLoggedIn) {
+=======
+              if (message.owner !== userLoggedIn) {
+>>>>>>> parent of 8cc10c6... chat working
                 return (
                   <>
-                    <p className="date-user">
-                      {formatDates(message.date_time)}
-                    </p>
+                    <p>{formatDates(message.date_time)}</p>
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__user-bubble userMessage"
+                      className="chat-page__screen__recipient-bubble recipientMessage"
                     >
                       <p>{message.body}</p>
                     </div>
@@ -99,20 +107,20 @@ export default function ChatPage() {
                 );
               } else if (message.owner === "Chat Bot") {
                 return (
-                  <div className="chat-bot" key={`message-${key}`}>
+                  <div className="" key={`message-${key}`}>
+                    <p>{formatDates(message.date_time)}</p>
+                    <h3>{message.owner}</h3>
                     <p>{message.body}</p>
                   </div>
                 );
               } else {
                 return (
                   <>
-                    <p className="date-recipient">
-                      {formatDates(message.date_time)}
-                    </p>
+                    <p>{formatDates(message.date_time)}</p>
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__recipient-bubble recipientMessage"
+                      className="chat-page__screen__user-bubble userMessage"
                     >
                       <p>{message.body}</p>
                     </div>
