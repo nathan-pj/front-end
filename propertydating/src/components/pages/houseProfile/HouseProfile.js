@@ -1,15 +1,29 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchPropertyById } from "../../../utils/api";
 import { currencyFormatter } from "../../../utils/currencyFormatter";
+
+import { useAuth0 } from "@auth0/auth0-react";
+import { removeGoogleFromId } from '../../../utils/removeGoogleFromId';
+import { useNavigate } from "react-router-dom";
 
 //TODO Remove this static placeholder house pic for <img> tag for dynamic image
 import placeHolderPic from "./housepic.jpg";
 
+
 export default function HouseProfile() {
   const { house_id } = useParams();
 
-  console.log(house_id);
+ 
+  const { user } = useAuth0();
+
+  let navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    navigate(`/chat/${removeGoogleFromId(user.sub)}-${property.user_id}`); // 1st = Logged in user |  2nd seller id
+  };
+
   const [property, setProperty] = useState({});
 
   useEffect(() => {
@@ -39,6 +53,10 @@ export default function HouseProfile() {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="centerDivContent">
+      <button className="purple-button" onClick={handleClick}>Message Seller</button>
+      <Link to={`/user-profile/${property.user_id}`}><button className="purple-button" onClick={handleClick}>View Seller Profile</button></Link>
       </div>
     </div>
   );
