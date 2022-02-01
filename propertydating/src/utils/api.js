@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const propertyHookUpAPI = axios.create({
-  baseURL: `https://property-backend-api.herokuapp.com/api` 
+  baseURL: `https://property-backend-api.herokuapp.com/api`
 });
 
 export const fetchProperties = () => {
@@ -47,7 +47,6 @@ export const postNewUser = (
   email,
   profile_pic
 ) => {
-  
   return propertyHookUpAPI
     .post(`/users`, {
       user_id: user_id,
@@ -63,16 +62,15 @@ export const postNewUser = (
     });
 };
 
-export const getUser = (user_id) => {
-  console.log(user_id)
+export const getUser = user_id => {
   return propertyHookUpAPI.get(`/users/${user_id}`).then(res => {
     return res.data.user;
   });
 };
 
-export const patchLikedHouses = (user_id, house) => {
+export const patchLikedHouses = (user_id, property_id) => {
   return propertyHookUpAPI
-    .patch(`/users/${user_id}/likedhouses`, { house })
+    .patch(`/users/${user_id}/likedhouses`, { property_id: property_id })
     .then(res => {
       return res.data.user;
     });

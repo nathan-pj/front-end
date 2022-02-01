@@ -48,7 +48,7 @@ export default function App() {
             {isAuthenticated && <Routes>
               <Route path="/" element={<SwipePage />} />
               <Route path="/liked-houses" element={<Favourites />} />
-              <Route path="/user-profile/:user_id" element={<UserProfile />} />
+              <Route path="/user-profile" element={<UserProfile />} />
               <Route
                 path="/house-profile/:house_id"
                 element={<HouseProfile />}

@@ -76,41 +76,42 @@ export default function AddProperty() {
   };
   return (
     <div className="propertyUpload">
-      <h1>Add Property</h1>
+      <p className="text-center text-xl">Add Property</p>
       <div className="newHouseBoxes">
-      <div className="mainBox"> 
+        <div className="mainBox">
           {houseImageArray[0] === null ? null : (
+            <>
               <img
+                className="mainImage"
                 src={houseImageArray[0]}
-                alt="Added House Image 1"
+                alt="house"
               ></img>
-          )}
-        </div>
-        <div className="firstBox"> 
-          {houseImageArray[1] === null ? null : (
+              <br></br>
               <img
+                className="mainImage"
                 src={houseImageArray[1]}
-                alt="Added House Image 2"
+                alt="house"
               ></img>
+            </>
           )}
         </div>
-      {/*   <div className="secondaryBoxes"> */}
+        <div className="secondaryBoxes">
           <div className="secondBox">
             {houseImageArray[2] === null ? null : (
-              <img src={houseImageArray[2]} alt="Added House Image 3"></img>
+              <img src={houseImageArray[2]} alt="house"></img>
             )}
           </div>
           <div className="thirdBox">
             {houseImageArray[3] === null ? null : (
-              <img src={houseImageArray[3]} alt="Added House Image 4"></img>
+              <img src={houseImageArray[3]} alt="house"></img>
             )}
           </div>
           <div className="fourthBox">
             {houseImageArray[4] === null ? null : (
-              <img src={houseImageArray[4]} alt="Added House Image 5"></img>
+              <img src={houseImageArray[4]} alt="house"></img>
             )}
           </div>
-       {/*  </div> */}
+        </div>
       </div>
       <form className="center" action="">
         <label htmlFor="property-type">Select Property Type:</label>
@@ -127,7 +128,7 @@ export default function AddProperty() {
           <option value="studio">Studio</option>
           <option value="bungalow">Bungalow</option>
         </select>
-       
+        <div className="">
           <label htmlFor="">Postcode :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -137,7 +138,8 @@ export default function AddProperty() {
               setPostCodeInput(event.target.value);
             }}
           />
-    
+        </div>
+        <div>
           <label htmlFor="">Price :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -147,7 +149,8 @@ export default function AddProperty() {
               setPriceInput(event.target.value);
             }}
           />
-       
+        </div>
+        <div>
           <label htmlFor="">Beds :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -157,7 +160,8 @@ export default function AddProperty() {
               setBedsInput(event.target.value);
             }}
           />
-      
+        </div>
+        <div>
           <label htmlFor="">Upload Image:</label>
           <br></br>
           <input
@@ -168,7 +172,7 @@ export default function AddProperty() {
               setImage(e.target.files[0]);
             }}
           />
-     
+        </div>
         <button
           className="p-1 m-1 ml-0 text-green-100 bg-green-500 rounded hover:bg-green-800"
           onClick={handleUpload}
@@ -177,7 +181,7 @@ export default function AddProperty() {
         </button>
         <p>Uploaded {progress} %</p>
       </form>
-      <div className="submitImages">{isLoading ? (
+      {isLoading ? (
         <p>Uploading your property</p>
       ) : (
         <button
@@ -186,7 +190,7 @@ export default function AddProperty() {
         >
           Submit
         </button>
-      )}</div>
+      )}
       {isError ? <p>Sorry, something went wrong, try again</p> : null}
       {uploaded ? <p>Your property has been uploaded successfully</p> : null}
     </div>

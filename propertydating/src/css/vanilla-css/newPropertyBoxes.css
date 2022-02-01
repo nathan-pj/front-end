@@ -1,126 +1,39 @@
-.propertyUpload .propertyUpload {
-  margin: 0 auto;
+.propertyUpload {
+  margin-left: auto;
+  margin-right: auto;
+  width: 15em;
 }
 
-.propertyUpload .newHouseBoxes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: 
-        "mainImg secondImg secondImg"
-        "mainImg secondImg secondImg"
-        "mainImg thirdImg thirdImg"
-        "firstImg thirdImg thirdImg"
-        "firstImg forthImg forthImg"
-        "firstImg forthImg forthImg";
+.newHouseBoxes {
+  display: flex;
+  flex-direction: row;
   border: 2px grey solid;
-  margin-bottom: 40px;
-  min-height: 400px;
-}
-.newHouseBoxes div {
-  padding: 5px;
-  box-sizing: border-box;
+  height: min(40vh, 280px);
+  width: min(80vw, 280px);
 }
 
-/* .propertyUpload .secondaryBoxes {
+.mainBox {
+  padding-top: 3%;
+}
+
+.secondaryBoxes {
   display: flex;
   flex-direction: column;
   width: 50em;
-} */
-
-.propertyUpload .newHouseBoxes img{
-  max-height: 150px;
 }
 
-.propertyUpload .mainBox {
-  grid-area: mainImg;
+.secondBox,
+.thirdBox,
+.fourthBox {
+  border: 1px grey solid;
+  height: 35%;
+  padding-top: 25%;
+}
+
+.mainImage {
   object-fit: contain;
-  border: 1px grey solid;
-  justify-content: center;
-    display: flex;
-    align-items: center;
-}
-.propertyUpload .firstBox{
-  grid-area: firstImg;
-  border: 1px grey solid;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  
-}
-.propertyUpload .secondBox{
-  grid-area: secondImg;
-  display: flex;
-    justify-content: center;
-    border: 1px grey solid;
-    align-items: center;
-}
-.propertyUpload .thirdBox{
-  grid-area: thirdImg;
-  display: flex;
-    justify-content: center;
-    border: 1px grey solid;
-    align-items: center;
-}
-.propertyUpload .fourthBox {
-  border: 1px grey solid;
-  grid-area: forthImg;
-  display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.propertyUpload .upload {
+.upload {
   max-width: 300px;
-}
-.propertyUpload form{
-  width: 70%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.propertyUpload label {
-  text-transform: uppercase;
-  font-size: 11px;
-}
-.propertyUpload input {
-  border: 1px solid black;
-  margin-bottom: 5px;
-  padding: 5px;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
-.propertyUpload select {
-  border: 1px solid black;
-  margin-bottom: 5px;
-  padding: 5px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  color: #9ba3af;
-}
-
-.submitImages{
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: 0 auto;
-}
-
-@media only screen and (max-width: 800px) {
-  .propertyUpload .newHouseBoxes {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-areas: 
-          "mainImg"
-          "firstImg"
-          "secondImg"
-          "thirdImg"
-          "forthImg";
-  }
-  .submitImages{
-    width: 100%;
-  }
-  .propertyUpload form{
-    width: 100%;
-  }
 }

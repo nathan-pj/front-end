@@ -16,7 +16,7 @@ export const Login = () => {
 
 {isAuthenticated && (
         <>
-          {user && <Link to={`/user-profile/${user.sub}`}><img src={user.picture} alt={user.name} /></Link>}
+          <Link to="/user-profile"><img src={user.picture} alt={user.name} /></Link>
           <button
             onClick={() => logout({ returnTo: "http://localhost:3000/" })}
           >
