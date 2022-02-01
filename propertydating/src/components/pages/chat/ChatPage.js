@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { io } from "socket.io-client";
 import { useParams, Link } from "react-router-dom";
-
+import GetRecipientName from "./GetRecipientName";
 export default function ChatPage() {
   const [messages, setMessages] = useState(chatDummy.messages);
   const userLoggedIn = 2;
-  const socket = io("https://property-backend-api.herokuapp.com/"); 
- 
+  const socket = io("https://property-backend-api.herokuapp.com/");
+
   const { room_id } = useParams();
 
   const [message, setMessage] = useState("");
@@ -21,10 +21,8 @@ export default function ChatPage() {
   const [userLeft, setUserLeft] = useState(false);
   const { user } = useAuth0();
   useEffect(() => {
-
-   
     //let user = prompt("Please enter your username");
-    setUserId(user.sub)
+    setUserId(user.sub);
 
     /*    const toAndFromIds = room_id.split("-"); */
 
@@ -35,7 +33,11 @@ export default function ChatPage() {
       // console.log(socket.id); // x8WIv7-mJelg7on_ALbx
     });
 
-    socket.emit("join room", { username: user.name, userId: user.sub, to: room_id });
+    socket.emit("join room", {
+      username: user.name,
+      userId: user.sub,
+      to: room_id,
+    });
 
     socket.on("user joined", (msg) => {
       setMessageFromServer([msg]);
@@ -77,14 +79,15 @@ export default function ChatPage() {
       return `${newDate}`;
     }
   };
+
   return (
     <div className="chat-page">
-      <h1>{userId}</h1>
+      <GetRecipientName />
+
       <div className="chat-page__screen">
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
-              console.log(message.owner);
               if (message.owner === userLoggedIn) {
                 return (
                   <>
