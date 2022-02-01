@@ -10,14 +10,6 @@
   flex-direction: column;
 }
 
-.date-user {
-  text-align: right;
-}
-.date-recipient {
-  text-align: left;
-}
-.chat-bot {
-}
 .userMessage {
   background-color: #19a8b3;
   max-width: 500px;
