@@ -12,7 +12,7 @@ export function ConstProvider({ children }) {
   const [showCross, setShowCross] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { user, isAuthenticated } = useAuth0();
-  console.log(user);
+
   useEffect(() => {
     if (user !== undefined) {
       postNewUser(
