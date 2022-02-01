@@ -5,9 +5,8 @@ import { useContext } from "react";
 import Context from "../../../contexts/Context";
 
 export default function FavouriteCard({ house, index }) {
+  
   let navigate = useNavigate();
-
-  const { likedHouses } = useContext(Context);
 
   const handleClick = e => {
     e.stopPropagation();
@@ -16,12 +15,11 @@ export default function FavouriteCard({ house, index }) {
 
   return (
     <>
-      {likedHouses.length > 0 ? (
         <div className="favourite-card" onClick={handleClick}>
           <div className="favourite-card__image">
             <img src={house.house_images[0]} alt="house pic"></img>
             <div className="favourite-card__image__chat-icon">
-              <ChatIcon />
+              <ChatIcon index={index} house={house}/>
             </div>
             <div className="favourite-card__image__bin-icon">
               <BinIcon index={index} house={house} />
@@ -35,7 +33,6 @@ export default function FavouriteCard({ house, index }) {
             </ul>
           </div>
         </div>
-      ) : null}
     </>
   );
 }

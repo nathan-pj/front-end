@@ -1,38 +1,41 @@
 import chatDummy from "./chatDummy";
 import TextInput from "./TextInput";
 import { useState, useEffect } from "react";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { io } from "socket.io-client";
 import { useParams, Link } from "react-router-dom";
 
 export default function ChatPage() {
   const [messages, setMessages] = useState(chatDummy.messages);
   const userLoggedIn = 2;
-  const socket = io("https://property-backend-api.herokuapp.com/");
+ /*  const socket = io("https://property-backend-api.herokuapp.com/"); */
+ const socket = io("http://localhost:9090/");
   const { room_id } = useParams();
 
   const [message, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
   const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("21213");
+  const [userId, setUserId] = useState("");
   const [users, SetUsers] = useState([]);
   const [messageFromServer, setMessageFromServer] = useState([]);
   const [userLeft, setUserLeft] = useState(false);
-
+  const { user } = useAuth0();
   useEffect(() => {
+
+   
     //let user = prompt("Please enter your username");
-    let user = 2;
+    setUserId(user.sub)
 
     /*    const toAndFromIds = room_id.split("-"); */
 
-    setUsername(user);
+    setUsername(user.name);
 
     // client-side
     socket.on("connect", () => {
       console.log(socket.id); // x8WIv7-mJelg7on_ALbx
     });
 
-    socket.emit("join room", { username: user, userId, to: room_id });
+    socket.emit("join room", { username: user.name, userId: user.sub, to: room_id });
 
     socket.on("user joined", (msg) => {
       setMessageFromServer([msg]);

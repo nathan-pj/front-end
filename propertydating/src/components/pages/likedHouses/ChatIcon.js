@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { removeGoogleFromId } from '../../../utils/removeGoogleFromId';
 
-export default function ChatIcon() {
+export default function ChatIcon(house) {
+
+  const { user } = useAuth0();
 
   let navigate = useNavigate();
 
   const handleClick = (e) => {
     e.stopPropagation();
-    navigate(`/chat`);
+    navigate(`/chat/${removeGoogleFromId(user.sub)}-${house.house.user_id}`); // 1st = Logged in user |  2nd seller id
   };
 
   return (

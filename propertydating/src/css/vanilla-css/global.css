@@ -21,3 +21,23 @@ h1 {
   font-size: 30px;
   margin-bottom: 20px;
 }
+
+.purple-button{
+  width: 100%;
+  background-color: #A855F7;
+  padding: 5px 10px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  min-width: 230px;
+}
+.purple-button:hover{
+  background-color: #8916f5;
+}
+.centerDivContent{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  flex-direction: column;
+}
