@@ -21,14 +21,13 @@ export default function HouseArrows({
     });
     setInitialRender(false);
     if (liked) {
-      if (likedHouses.filter(e => e.house_id === house.house_id).length === 0){
-        patchLikedHouses(user.sub, house).then((res) => {
+      if (!likedHouses.includes(house.house_id))
+        patchLikedHouses(user.sub, house.house_id).then((res) => {
           setLikedHouses((currentState) => {
-            const copy = [...currentState, house];
+            const copy = [...currentState, house.house_id];
             return copy;
           });
-        })
-      }
+        });
     }
   };
 

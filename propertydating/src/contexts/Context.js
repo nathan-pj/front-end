@@ -14,30 +14,38 @@ export function ConstProvider({ children }) {
   const { user, isAuthenticated } = useAuth0();
   console.log(user);
   useEffect(() => {
-    user &&
-      getUser(user.sub)
-        .then((user) => {
-          if (!user) {
-            return postNewUser(
-              user.sub,
-              user.name,
-              user.nickname,
-              user.given_name,
-              user.family_name,
-              user.email,
-              user.picture
-            );
-          }
-          return user;
-        })
-        .then((user) => {
-          setLikedHouses(user.liked_houses);
-          setLoggedInUser(user);
+    if (user !== undefined) {
+      postNewUser(
+        user.sub,
+        user.name,
+        user.nickname,
+        user.given_name,
+        user.family_name,
+        user.email,
+        user.picture
+      )
+        .then((res) => {
+          setLoggedInUser(res);
         })
         .catch((err) => {
-          console.log(err);
+          getUser(user.sub).then((res) => {
+            setLoggedInUser(res);
+            setLikedHouses([...new Set(res.liked_houses)]);
+          });
         });
+    }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (likedHouses.length > 0) {
+      setListOfLikedHouses((currValue) => {
+        const newArray = testHouses.filter((house) => {
+          return likedHouses.includes(house.house_id);
+        });
+        return newArray;
+      });
+    }
+  }, [likedHouses]);
 
   return (
     <Context.Provider

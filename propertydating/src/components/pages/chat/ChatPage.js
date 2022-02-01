@@ -88,7 +88,11 @@ export default function ChatPage() {
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
+<<<<<<< HEAD
               if (message.owner === userLoggedIn) {
+=======
+              if (message.owner !== userLoggedIn) {
+>>>>>>> parent of 8cc10c6... chat working
                 return (
                   <>
                     <p>{formatDates(message.date_time)}</p>

@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
-export default function ChatIcon(house) {
-
+export default function ChatIcon() {
+  const [sellerId, setSellerId] = useState("1");
   const { user } = useAuth0();
-
   const formatId = (user_id) => {
     if (user_id.includes("google")) {
       const newId = user_id.split("|")[1];
-      console.log(newId);  
+      console.log(newId);
       return newId;
     }
     return user_id;
@@ -19,7 +17,7 @@ export default function ChatIcon(house) {
 
   const handleClick = (e) => {
     e.stopPropagation();
-    navigate(`/chat/${formatId(user.sub)}-${formatId(house.house.user_id)}`); // 1st = Logged in user |  2nd seller id
+    navigate(`/chat/${formatId(user.sub)}-${formatId(sellerId)}`);
   };
 
   return (
