@@ -7,9 +7,10 @@ export default function LikedHouses() {
   return (
     <>
       <h1>Liked Houses</h1>
-      {likedHouses.length > 0 ? (
+       {likedHouses.length > 0 ? (
         <div className="favourites-main">
-          {listOfLikedHouses.map((house, index) => {
+          {likedHouses.map((house, index) => {
+            console.log("this", house);
             return (
               <FavouriteCard
                 key={`house-${index}`}
@@ -21,7 +22,7 @@ export default function LikedHouses() {
         </div>
       ) : (
         <p>You don't have any liked houses.</p>
-      )}
+      )} 
     </>
   );
 }

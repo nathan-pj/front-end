@@ -13,32 +13,39 @@ export default function HomePage() {
   const [numOfImages, setNumOfImages] = useState();
   const [initialRender, setInitialRender] = useState(true);
   const [amountOfProperties, setAmountOfProperties] = useState(
-    testHouses.length
+    filteredProperty.length
   );
   const [isLoading, setIsLoading] = useState(true);
+ 
+  useEffect(() => {
+    setIsLoading(true);
+    fetchProperties().then((res) => {
+      setFilteredPropery(res); 
+      setAmountOfProperties(res.length);
+     setIsLoading(false);
+    });
+  }, []); 
+
+  useEffect(() => {
+    const filtered = filteredProperty.filter((house, index) => {
+      if(!likedHouses.some((liked) => liked.house_id === house.house_id)){
+        return house;
+      }
+      return;
+    })
+    setFilteredPropery(filtered)
+   
+  }, [likedHouses])
 
 
   useEffect(() => {
     if (amountOfProperties > 0) {
-      setNumOfImages(testHouses[houseIndex].house_images.length - 1);
+      console.log(filteredProperty);
+      if(filteredProperty.length > 1){
+        setNumOfImages(filteredProperty[houseIndex].house_images.length - 1);
+      }
     }
-  }, [houseIndex, testHouses, filteredProperty]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetchProperties().then((res) => {
-      setTestHouses(res);
-      setAmountOfProperties(res.length);
-      setFilteredPropery((currValue) => {
-        const filtered = testHouses.filter((house) => {
-          return !likedHouses.includes(house.house_id);
-        });
-        return filtered;
-      });
-      setIsLoading(false);
-     
-    });
-  }, [testHouses]);
+  }, [houseIndex, filteredProperty]);
 
   return (
     <div className="swipe-page">
