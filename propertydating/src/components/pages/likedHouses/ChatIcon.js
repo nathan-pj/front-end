@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { removeGoogleFromId } from '../../../utils/removeGoogleFromId';
 
 export default function ChatIcon(house) {
 
   const { user } = useAuth0();
 
+  const formatId = (user_id) => {
+    if (user_id.includes("google")) {
+      const newId = user_id.split("|")[1];
+      console.log(newId);  
+      return newId;
+    }
+    return user_id;
+  };
+
   let navigate = useNavigate();
 
   const handleClick = (e) => {
     e.stopPropagation();
-    navigate(`/chat/${removeGoogleFromId(user.sub)}-${house.house.user_id}`); // 1st = Logged in user |  2nd seller id
+    navigate(`/chat/${formatId(user.sub)}-${formatId(house.house.user_id)}`); // 1st = Logged in user |  2nd seller id
   };
 
   return (

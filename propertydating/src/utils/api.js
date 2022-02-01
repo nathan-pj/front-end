@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const propertyHookUpAPI = axios.create({
-/*   baseURL: `https://property-backend-api.herokuapp.com/api` */
-baseURL: `http://localhost:9090/api/`
+  baseURL: `https://property-backend-api.herokuapp.com/api` 
 });
 
 export const fetchProperties = () => {
