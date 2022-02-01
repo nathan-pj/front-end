@@ -1,5 +1,5 @@
 .chat-page {
-  color: #282c34;
+  color: #9e9e9e;
   overflow-y: scroll;
   max-height: calc(100vh - 200px);
   overflow-x: hidden;
@@ -10,10 +10,17 @@
   flex-direction: column;
 }
 
+.date-user {
+  text-align: right;
+}
+.date-recipient {
+  text-align: left;
+}
+.chat-bot {
+}
 .userMessage {
   background-color: #19a8b3;
   max-width: 500px;
-
   margin-bottom: 12px;
   line-height: 24px;
   padding: 10px 20px;
@@ -22,9 +29,9 @@
   color: rgb(252, 252, 252);
   text-align: center;
   font-size: 15px;
-  justify-content: flex-end;
+  justify-content: flex-start;
   display: flex;
-  text-align: right;
+  text-align: left;
 }
 
 .recipientMessage {
