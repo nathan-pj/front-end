@@ -55,8 +55,11 @@ export default function ChatPage() {
           owner: message.owner,
           body: message.body,
           date_time: message.date_time,
+          to: message.to,
         },
       ]);
+      setUserId(message.owner);
+      console.log(message.owner);
     });
 
     socket.on("user left", (msg) => {
@@ -88,14 +91,14 @@ export default function ChatPage() {
         {allMessages.length === 0
           ? null
           : allMessages.map((message, key) => {
-              if (message.owner === userLoggedIn) {
+              if (message.owner === "muffin ninjas") {
                 return (
                   <>
-                    <p>{formatDates(message.date_time)}</p>
+                    <p className="userDate">{formatDates(message.date_time)}</p>
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__recipient-bubble recipientMessage"
+                      className="chat-page__screen__user-bubble userMessage"
                     >
                       <p>{message.body}</p>
                     </div>
@@ -116,7 +119,7 @@ export default function ChatPage() {
 
                     <div
                       key={`message-${key}`}
-                      className="chat-page__screen__user-bubble userMessage"
+                      className="chat-page__screen__recipient-bubble recipientMessage"
                     >
                       <p>{message.body}</p>
                     </div>
