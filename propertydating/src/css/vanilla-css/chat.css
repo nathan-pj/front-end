@@ -33,7 +33,9 @@
   display: flex;
   text-align: left;
 }
-
+.userDate {
+  text-align: right;
+}
 .recipientMessage {
   background-color: indigo;
   max-width: 500px;
