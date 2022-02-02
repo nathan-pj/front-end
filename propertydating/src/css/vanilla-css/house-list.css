@@ -29,11 +29,11 @@
   color: rgb(19, 184, 19);
   transition: all 1s ease;
 }
-.favourite-card__image__chat-icon:hover,
+/* .favourite-card__image__chat-icon:hover,
 .favourite-card__image__bin-icon:hover {
   transform: scale(1.3);
   color: rgb(27, 168, 179);
-}
+} */
 .favourite-card__image__bin-icon {
   position: absolute;
   top: 7px;

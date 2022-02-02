@@ -4,7 +4,7 @@ import tick from "../../../images/tick.png";
 import cross from "../../../images/cross.png";
 import ImageArrowLeft from "./ImageArrowLeft";
 import ImageArrowRight from "./ImageArrowRight";
-
+import BedIcon from "./BedIcon";
 const MainHouseImage = ({
   house,
   setCurrentImage,
@@ -94,6 +94,7 @@ const MainHouseImage = ({
     setShowTick(false);
     setIsDragged(false);
   };
+  console.log(house);
 
   return (
     <div className="house-card-meta" onDragOver={onDragOver}>
@@ -137,10 +138,19 @@ const MainHouseImage = ({
           />
         </div>
       </div>
-      <div className="house-card-meta__details">
-        <p>{`Price: £${house.price}`}</p>
-        <p>{`Type: ${house.property_type} `}</p>
-        <p>{`Postcode: ${house.postcode}`}</p>
+      <div>
+        <p className="house-card-meta__details">
+          {`£${house.price} - ${house.property_type}`}
+        </p>
+
+        <div className="house-card-meta__details__second-bar">
+          <p>{`${house.postcode}`}</p>
+          <p className="bed-icon">
+            {`${house.beds}  `}
+
+            <BedIcon />
+          </p>
+        </div>
       </div>
     </div>
   );
