@@ -76,7 +76,7 @@ export default function ChatPage() {
   }, [messageFromServer]);
   const formatDates = (date) => {
     if (typeof date === "string") {
-      return date;
+      return new Date(+date).toLocaleTimeString("en-US");;
     } else {
       const newDate = new Date(date).toLocaleTimeString("en-US");
       return `${newDate}`;
@@ -106,7 +106,7 @@ export default function ChatPage() {
                 );
               } else if (message.owner === "Chat Bot") {
                 return (
-                  <div className="" key={`message-${key}`}>
+                  <div className="chat-bot" key={`message-${key}`}>
                     <p>{formatDates(message.date_time)}</p>
                     <h3>{message.owner}</h3>
                     <p>{message.body}</p>
@@ -115,8 +115,7 @@ export default function ChatPage() {
               } else {
                 return (
                   <>
-                    <p>{formatDates(message.date_time)}</p>
-
+              <p>{formatDates(message.date_time)}</p>
                     <div
                       key={`message-${key}`}
                       className="chat-page__screen__recipient-bubble recipientMessage"

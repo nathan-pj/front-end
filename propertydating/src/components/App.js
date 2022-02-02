@@ -6,8 +6,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "../css/imports.css";
 
 import TopNav from "./nav/TopNav";
+import TopNavMobile from "./nav/TopNavMobile";
 import Nav from "./nav/Nav";
-
+import NavMobile from "./nav/NavMobile";
 
 const Favourites = React.lazy(() =>
   import("./pages/likedHouses/Favourites.js")
@@ -35,7 +36,7 @@ export default function App() {
   return (
       <ConstProvider>
         <TopNav />
-
+        <TopNavMobile />
         <div className="main_container">
           <Suspense
             fallback={
@@ -67,6 +68,7 @@ export default function App() {
         </div>
 
         <Nav />
+        <NavMobile />
       </ConstProvider>
   );
 }

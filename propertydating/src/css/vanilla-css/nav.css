@@ -95,10 +95,39 @@
   top: 0px;
   right: 0px;
 }
+.bottom-nav.mobile{
+  display: none;
+}
+.top-nav.mobile{
+  display: none;
+}
 @media only screen and (max-width: 600px) {
+  .bottom-nav.desktop{
+    display: none;
+  }
   .bottom-nav {
     grid-template-columns: repeat(2, 1fr);
     padding: 10px;
     box-sizing: border-box;
+  }
+  .bottom-nav.mobile{
+    display: grid;
+    font-size: 35px;
+  }
+  .bottom-nav {
+    grid-template-columns: repeat(4, 1fr);
+    height: 50px;
+  }
+  .bottom-nav div:hover {
+   border-radius: 10px;
+  }
+  .top-nav.desktop{
+    display: none;
+  }
+  .top-nav.mobile{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: "logo logo logo login login login";
+    padding: 5px;
   }
 }

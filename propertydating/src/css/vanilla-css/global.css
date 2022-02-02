@@ -21,3 +21,9 @@ h1 {
   font-size: 30px;
   margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 800px) {
+  .main_container {
+    min-height: calc(100vh - 100px);
+  }
+}

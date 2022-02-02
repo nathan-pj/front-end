@@ -5,11 +5,11 @@ import logo from "../../images/logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from '../pages/login/Login';
 
-export default function Nav() {
+export default function TopNavMobile() {
   const { logout, user, isAuthenticated } = useAuth0();
 
   return (
-    <nav className="top-nav desktop">
+    <nav className="top-nav mobile">
       <div className="top-nav__logo">
         <Link to="/">
           <img src={logo} alt="Property Hook-Up" />
