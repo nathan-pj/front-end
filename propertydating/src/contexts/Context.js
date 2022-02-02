@@ -12,7 +12,7 @@ export function ConstProvider({ children }) {
   const [showCross, setShowCross] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { user, isAuthenticated } = useAuth0();
-  console.log(likedHouses);
+
   useEffect(() => {
     if (user !== undefined) {
       postNewUser(
@@ -30,6 +30,7 @@ export function ConstProvider({ children }) {
         .catch((err) => {
           getUser(user.sub).then((res) => {
             setLoggedInUser(res);
+            console.log(res.liked_houses);
             setLikedHouses([...new Set(res.liked_houses)]);
           });
         });
@@ -45,7 +46,7 @@ export function ConstProvider({ children }) {
         return newArray;
       });
     }
-  }, [likedHouses]);
+  }, [likedHouses, isAuthenticated]);
 
   return (
     <Context.Provider
