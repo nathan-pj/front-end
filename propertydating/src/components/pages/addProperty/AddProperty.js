@@ -76,42 +76,43 @@ export default function AddProperty() {
   };
   return (
     <div className="propertyUpload">
-      <p className="text-center text-xl">Add Property</p>
+      <h1>Add Property</h1>
       <div className="newHouseBoxes">
-        <div className="mainBox">
+      <div className="mainImg">
           {houseImageArray[0] === null ? null : (
-            <>
               <img
                 className="mainImage"
                 src={houseImageArray[0]}
-                alt="house"
+                 alt="Add an Image 1"
               ></img>
-              <br></br>
-              <img
-                className="mainImage"
-                src={houseImageArray[1]}
-                alt="house"
-              ></img>
-            </>
           )}
         </div>
-        <div className="secondaryBoxes">
+       
+
+       <div className="firstBox">
+       {houseImageArray[2] === null ? null : (
+       <img
+         src={houseImageArray[1]}
+         alt="Add an Image 2"
+       ></img>
+       )}
+</div>
           <div className="secondBox">
             {houseImageArray[2] === null ? null : (
-              <img src={houseImageArray[2]} alt="house"></img>
+              <img src={houseImageArray[2]} alt="Add an Image 3"></img>
             )}
           </div>
           <div className="thirdBox">
             {houseImageArray[3] === null ? null : (
-              <img src={houseImageArray[3]} alt="house"></img>
+              <img src={houseImageArray[3]} alt="Add an Image 4" ></img>
             )}
           </div>
           <div className="fourthBox">
             {houseImageArray[4] === null ? null : (
-              <img src={houseImageArray[4]} alt="house"></img>
+              <img src={houseImageArray[4]} alt="Add an Image 5" ></img>
             )}
           </div>
-        </div>
+       
       </div>
       <form className="center" action="">
         <label htmlFor="property-type">Select Property Type:</label>
@@ -128,7 +129,7 @@ export default function AddProperty() {
           <option value="studio">Studio</option>
           <option value="bungalow">Bungalow</option>
         </select>
-        <div className="">
+      
           <label htmlFor="">Postcode :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -138,8 +139,7 @@ export default function AddProperty() {
               setPostCodeInput(event.target.value);
             }}
           />
-        </div>
-        <div>
+     
           <label htmlFor="">Price :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -149,8 +149,7 @@ export default function AddProperty() {
               setPriceInput(event.target.value);
             }}
           />
-        </div>
-        <div>
+      
           <label htmlFor="">Beds :</label>
           <input
             className="m-1 border-2 border-gray-300 rounded"
@@ -160,10 +159,9 @@ export default function AddProperty() {
               setBedsInput(event.target.value);
             }}
           />
-        </div>
-        <div>
+      
           <label htmlFor="">Upload Image:</label>
-          <br></br>
+       
           <input
             className="upload"
             type="file"
@@ -172,7 +170,7 @@ export default function AddProperty() {
               setImage(e.target.files[0]);
             }}
           />
-        </div>
+      
         <button
           className="p-1 m-1 ml-0 text-green-100 bg-green-500 rounded hover:bg-green-800"
           onClick={handleUpload}
@@ -181,6 +179,7 @@ export default function AddProperty() {
         </button>
         <p>Uploaded {progress} %</p>
       </form>
+      <div className="submit-button">
       {isLoading ? (
         <p>Uploading your property</p>
       ) : (
@@ -191,6 +190,7 @@ export default function AddProperty() {
           Submit
         </button>
       )}
+      </div>
       {isError ? <p>Sorry, something went wrong, try again</p> : null}
       {uploaded ? <p>Your property has been uploaded successfully</p> : null}
     </div>

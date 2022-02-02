@@ -1,34 +1,87 @@
-.propertyUpload {
+/* .propertyUpload {
   margin-left: auto;
   margin-right: auto;
-  width: 15em;
-}
+} */
 
 .newHouseBoxes {
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:  
+    "img1 img3 img3 img3"
+    "img1 img3 img3 img3"
+    "img1 img4 img4 img4"
+    "img2 img4 img4 img4"
+    "img2 img5 img5 img5"
+    "img2 img5 img5 img5";
+}
+.newHouseBoxes img{
+  object-fit: contain;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: 160px;
+
+}
+.mainImg{
+  grid-area: img1;
+  object-fit: contain;
+    border: 1px grey solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.firstBox{
+  grid-area: img2;
+  object-fit: contain;
+    border: 1px grey solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.secondBox{
+  grid-area: img3;
+  object-fit: contain;
+  border: 1px grey solid;
   display: flex;
-  flex-direction: row;
-  border: 2px grey solid;
-  height: min(40vh, 280px);
-  width: min(80vw, 280px);
+  justify-content: center;
+  align-items: center;
+}
+.thirdBox{
+  grid-area: img4;
+  object-fit: contain;
+    border: 1px grey solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fourthBox{
+  grid-area: img5;
+  object-fit: contain;
+  border: 1px grey solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.mainBox {
-  padding-top: 3%;
-}
 
-.secondaryBoxes {
+
+/* .mainBox {
+  min-height: 400px
+}
+ */
+/* .secondaryBoxes {
   display: flex;
   flex-direction: column;
-  width: 50em;
-}
+} */
 
-.secondBox,
+/* .secondBox,
 .thirdBox,
 .fourthBox {
   border: 1px grey solid;
   height: 35%;
   padding-top: 25%;
-}
+} */
 
 .mainImage {
   object-fit: contain;
@@ -36,4 +89,60 @@
 
 .upload {
   max-width: 300px;
+}
+.newHouseBoxes{
+  margin-bottom: 20px;
+}
+.propertyUpload form{
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.propertyUpload label {
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.propertyUpload input {
+  border: 1px solid black;
+  margin-bottom: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.propertyUpload .submit-button{
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+}
+.propertyUpload select {
+  border: 1px solid black;
+  margin-bottom: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #9ba3af;
+}
+
+@media only screen and (max-width: 800px) {
+  .propertyUpload .submit-button{
+    max-width: 100%;
+
+  }
+  .propertyUpload form{
+    max-width: 100%;
+  }
+  .newHouseBoxes {
+    min-height: 400px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:  
+      "img1"
+      "img2"
+      "img3"
+      "img4" 
+      "img5";
+  }
 }
