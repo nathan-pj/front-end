@@ -4,10 +4,12 @@ const propertyHookUpAPI = axios.create({
   baseURL: `https://property-backend-api.herokuapp.com/api`,
 });
 
-export const fetchProperties = () => {
-  return propertyHookUpAPI.get(`/properties`).then((res) => {
-    return res.data.properties;
-  });
+export const fetchProperties = (min_price = 0, max_price = 1000000) => {
+  return propertyHookUpAPI
+    .get(`/properties?min_price=${min_price}&max_price=${max_price}`)
+    .then((res) => {
+      return res.data.properties;
+    });
 };
 
 export const fetchPropertyById = (house_id) => {
@@ -80,6 +82,24 @@ export const deleteLikedProperty = (user_id, property_id) => {
   return propertyHookUpAPI
     .delete(`/users/${user_id}/likedhouses`, {
       data: { property_id: property_id },
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const updateSettings = (
+  user_id,
+  settings_min_price,
+  settings_max_price
+) => {
+  return propertyHookUpAPI
+    .patch(`/settings/${user_id}`, {
+      settings_min_price: settings_min_price,
+      settings_max_price: settings_max_price,
+    })
+    .then((res) => {
+      return res.data.settings;
     })
     .catch((err) => {
       console.log(err);

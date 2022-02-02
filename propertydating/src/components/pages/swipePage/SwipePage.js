@@ -5,12 +5,12 @@ import HouseCard from "./HouseCard";
 import { fetchProperties } from "../../../utils/api";
 
 export default function HomePage() {
-  const { testHouses, setTestHouses, likedHouses, setLikedHouses } =
+  const { loggedInUser, setTestHouses, likedHouses, setLikedHouses } =
     useContext(Context);
   const [filteredProperty, setFilteredPropery] = useState([]);
   const [houseIndex, setHouseIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
-  const [numOfImages, setNumOfImages] = useState();
+  const [numOfImages, setNumOfImages] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
   const [amountOfProperties, setAmountOfProperties] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,20 +22,26 @@ export default function HomePage() {
   }, [houseIndex, filteredProperty]);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchProperties().then((res) => {
-      setTestHouses(res);
-      setAmountOfProperties(res.length);
-      setFilteredPropery((currValue) => {
-        const filtered = res.filter((house) => {
-          return !likedHouses.includes(house.house_id);
+    if (loggedInUser) {
+      setIsLoading(true);
+      setNumOfImages(0);
+      fetchProperties(
+        loggedInUser.settings_price_min,
+        loggedInUser.settings_price_max
+      ).then((res) => {
+        setTestHouses(res);
+        setAmountOfProperties(res.length);
+        setFilteredPropery((currValue) => {
+          const filtered = res.filter((house) => {
+            return !likedHouses.includes(house.house_id);
+          });
+          setAmountOfProperties(filtered.length);
+          return filtered;
         });
-        setAmountOfProperties(filtered.length);
-        return filtered;
+        setIsLoading(false);
       });
-      setIsLoading(false);
-    });
-  }, []);
+    }
+  }, [loggedInUser]);
 
   return (
     <div className="swipe-page">

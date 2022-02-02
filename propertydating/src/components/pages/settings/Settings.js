@@ -1,37 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from "react";
+import Context from "../../../contexts/Context";
+import { updateSettings } from "../../../utils/api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Settings() {
-  
   const [postcode, setPostcode] = useState("");
-  const [radius, setRadius] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [radius, setRadius] = useState();
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
   const [houseType, setHouseType] = useState("");
+  const { setLoggedInUser } = useContext(Context);
+  const { user } = useAuth0();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!postcode && !radius && !minPrice && !maxPrice && !houseType){
-      return 
-    }
-
-    if (postcode) {
-      const postCodeRegEx = /^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/gi;
-      if (!postCodeRegEx.test(postcode)) {
-        return alert("Invalid postcode");
-      }
-    }
-
-    const profileObject = {
-      settings_postcode: postcode,
-      settings_radius: radius,
-      settings_price_min: minPrice,
-      settings_price_max: maxPrice,
-      settings_house_type: houseType,
-    };
-
-    console.log(profileObject);
-    console.log("Fetch request goes here");
+    updateSettings(user.sub, minPrice, maxPrice)
+      .then((res) => {
+        console.log(res);
+        setLoggedInUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     setPostcode("");
     setRadius("");
@@ -44,7 +35,7 @@ export default function Settings() {
     <div className="userProfile">
       <h1>Settings</h1>
       <form onSubmit={handleSubmit}>
-      {/* <label htmlFor="firstName">First Name</label>
+        {/* <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           name="firstName"
@@ -67,7 +58,7 @@ export default function Settings() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         /> */}
-         <label htmlFor="postcode">Postcode</label>
+        <label htmlFor="postcode">Postcode</label>
         <input
           type="text"
           name="postcode"
@@ -99,7 +90,7 @@ export default function Settings() {
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
         />
-         <label htmlFor="maxPrice">Max Price:</label>
+        <label htmlFor="maxPrice">Max Price:</label>
         <input
           name="maxPrice"
           type="number"
@@ -114,7 +105,7 @@ export default function Settings() {
           onChange={(e) => setHouseType(e.target.value)}
         >
           <option value={""}>Please select</option>
-          <option value={"detached"}>Detached</option>
+          <option value={"house"}>house</option>
           <option value={"semi-detached"}>Semi-detached</option>
           <option value={"terraced"}>Terraced</option>
           <option value={"flat"}>Flat</option>

@@ -30,7 +30,6 @@ export function ConstProvider({ children }) {
         .catch((err) => {
           getUser(user.sub).then((res) => {
             setLoggedInUser(res);
-            console.log(res.liked_houses);
             setLikedHouses([...new Set(res.liked_houses)]);
           });
         });
