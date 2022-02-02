@@ -42,7 +42,7 @@ export default function UserProfile() {
       <h1>{user.name}'s Profile</h1>
       <div className="userProfile__image">
         <img src={user.picture} alt={user.name} />
-        <button>Message User</button>  {!editProfile? <button onClick={() => setEditProfile(true)}>Edit User Information</button>: <button onClick={() => setEditProfile(false)}>Hide User Information</button>}
+        {!editProfile? <button onClick={() => setEditProfile(true)}>Edit User Information</button>: <button onClick={() => setEditProfile(false)}>Hide User Information</button>}
       </div>
       {editProfile && <form onSubmit={handleSubmit}>
       <label htmlFor="firstName">First Name</label>
